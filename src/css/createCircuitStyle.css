@@ -1,0 +1,90 @@
+
+
+/* Contenedor del formulario */
+.formCrear {
+    background: linear-gradient(145deg, rgba(0, 0, 0, 0.9), rgba(30, 30, 30, 0.8));
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5), 0 0 40px rgba(255, 0, 0, 0.8);
+    width: 600px;
+    max-width: 700px;
+    height: auto;
+    text-align: center;
+}
+
+/* Título del formulario */
+.formCrear h1 {
+    color: red;
+    text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Etiquetas de los inputs */
+.formCrear label {
+    display: block;
+    font-size: 11px;
+    margin: 10px 0 5px;
+    text-transform: uppercase;
+}
+
+/* Inputs y Textarea */
+.formCrear input, .formCrear textarea {
+    width: 80%;
+    max-width: 80%;
+    max-height: 200px;
+    padding: 10px;
+    background-color: #1a1a1a;
+    border: 2px solid red;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Efecto de enfoque en los inputs */
+.formCrear input:focus, .formCrear textarea:focus {
+    box-shadow: 0 0 10px red, 0 0 20px red;
+    border-color: white;
+}
+
+/* Botón de envío */
+.formCrear button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    background: red;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 10px red, 0 0 20px red;
+}
+
+/* Efecto hover en el botón */
+.formCrear button:hover {
+    background: white;
+    color: red;
+    box-shadow: 0 0 15px white, 0 0 30px red;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Aplicando la animación al formulario */
+#myformCrearCircuito {
+    animation: fadeIn 1s ease-in-out;
+}

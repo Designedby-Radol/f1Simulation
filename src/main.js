@@ -1,5 +1,6 @@
-import './style.css'
 import f1LogoW from './f1WhiteLogo.svg'
+import './css/style.css'
+import './css/start.css'
 
 
 // Components
@@ -7,7 +8,7 @@ import f1LogoW from './f1WhiteLogo.svg'
 import './components/createComponent.js';
 import './components/createComponents/createCircuitComponent.js';
 
-document.querySelector('#app').innerHTML = `
+document.querySelector('body').innerHTML = `
   <div class="FirstPage">
     <a href="https://www.formula1.com/" target="_blank">
       <img src="${f1LogoW}" class="logo" alt="Vite logo" />
@@ -26,30 +27,49 @@ document.querySelector('#app').innerHTML = `
 const startComponentButton = document.querySelector('#startComponent')
 startComponentButton.addEventListener('click' , (e) =>{
   e.preventDefault()
-  const component = document.createElement('div')
-  document.querySelector('#app').innerHTML = `
-  <div class= "card">
-    <button id="create">
-    Create
-    </button>
-  </div>
-  <div class= "card">
-    <button id="play">
-    Play
-    </button>
-  </div>
-  `
+  document.body.classList.add("fade-out")
+
+  setTimeout(() => {
+    const body = document.querySelector('body');
+  }, 1000);
+
+  const body = document.querySelector('body');
+  body.innerHTML='';
+
+  body.innerHTML = `
+  <header class="header">
+  <a id="btnBack"></a>
+  </header>
+  
+
+  <main id="main">
+ 
+  <a class="cardInit" id="create">
+    <h1>Admin</h1>
+    <p>Modify the content of the game.</p>
+</a>
+<a class="cardInit" id="play">
+    <h1>Player</h1>
+    <p>Play the game.</p>
+</a>
+
+  </main>
+  `;
+
+  let contAtras = 1
+  if (contAtras === 1){
+    const btnBack = document.querySelector('#btnBack').addEventListener('click', () =>{
+      location.reload();  
+    }); 
+  }
+  
+ 
+
   const createButton = document.querySelector('#create').addEventListener('click', (e) => {
     e.preventDefault();
+    
+    const appMain = document.querySelector('#main');
+    appMain.innerHTML = '<create-component></create-component>'
 
-    const headerCreate = document.createElement('header')
-    headerCreate.innerHTML = `
-    <create-component></create-component>
-    `;
-
-    const appMain = document.querySelector('#app');
-    appMain.innerHTML = ''
-
-    appMain.appendChild(headerCreate);
   })
 })
