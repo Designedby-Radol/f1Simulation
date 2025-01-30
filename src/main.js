@@ -1,24 +1,42 @@
 import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import f1LogoW from './f1WhiteLogo.svg'
 
 document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
+  <div class="FirstPage">
+    <a href="https://www.formula1.com/" target="_blank">
+      <img src="${f1LogoW}" class="logo" alt="Vite logo" />
     </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
+
+    <h1>Hello User!</h1>
     <div class="card">
-      <button id="counter" type="button"></button>
+      <button id="startComponent" type="button">Start Game</button>
     </div>
     <p class="read-the-docs">
-      Click on the Vite logo to learn more
+      Create teams and play as your favorite team in this interactive F1 game.
     </p>
   </div>
 `
 
-setupCounter(document.querySelector('#counter'))
+const startComponentButton = document.querySelector('#startComponent')
+startComponentButton.addEventListener('click' , (e) =>{
+  e.preventDefault()
+  const component = document.createElement('div')
+  document.querySelector('#app').innerHTML = `
+  <div class= "card">
+    <button id="create">
+    Create
+    </button>
+  </div>
+  <div class= "card">
+    <button id="play">
+    Play
+    </button>
+  </div>
+  `
+  const createButton = document.querySelector('#create').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelector('#app').innerHTML = `
+    <create-component></create-component>
+    `
+  })
+})
