@@ -1,6 +1,12 @@
 import './style.css'
 import f1LogoW from './f1WhiteLogo.svg'
 
+
+// Components
+
+import './components/createComponent.js';
+import './components/createComponents/createCircuitComponent.js';
+
 document.querySelector('#app').innerHTML = `
   <div class="FirstPage">
     <a href="https://www.formula1.com/" target="_blank">
@@ -15,7 +21,7 @@ document.querySelector('#app').innerHTML = `
       Create teams and play as your favorite team in this interactive F1 game.
     </p>
   </div>
-`
+`;
 
 const startComponentButton = document.querySelector('#startComponent')
 startComponentButton.addEventListener('click' , (e) =>{
@@ -35,8 +41,15 @@ startComponentButton.addEventListener('click' , (e) =>{
   `
   const createButton = document.querySelector('#create').addEventListener('click', (e) => {
     e.preventDefault();
-    document.querySelector('#app').innerHTML = `
+
+    const headerCreate = document.createElement('header')
+    headerCreate.innerHTML = `
     <create-component></create-component>
-    `
+    `;
+
+    const appMain = document.querySelector('#app');
+    appMain.innerHTML = ''
+
+    appMain.appendChild(headerCreate);
   })
 })
