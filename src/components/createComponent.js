@@ -5,29 +5,49 @@ class CreateComponent extends HTMLElement {
 
   connectedCallback() {
     this.innerHTML = `
+        <style> @import 'src/css/createStyle.css'</style>
         <div class= "card">
-            <button id="createCircuit">
-                Create Circuit
-            </button>
+            <a id="createCircuit">
+                <h1>Create Circuit</h1>
+                <p>Create a circuit to race and make competitions.</p>
+            </a>
         </div>
         <div class= "card">
-            <button id="createTeam">
-                Create Team
-            </button>
+            <a id="createTeam">
+                <h1>Create Team</h1>
+                <p>Create a team to participate in the simulator.</p>
+            </a>
         </div>
         <div class= "card">
-            <button id="createCars">
-                Create Cars
-            </button>
+            <a id="createPilots">
+                <h1>Create Pilot</h1>
+                <p>Create a pilot to participate in the simulator.</p>
+            </a>
+        </div>
+        <div class= "card">
+            <a id="createCars">
+                <h1>Create Cars</h1>
+                <p>Create a car to pilots to race.</p>
+            </a>
         </div>
         `;
+        const appMain = document.querySelector('#main');
+
+        let contAtras = 2
+        if (contAtras === 2){
+            const btnBack = document.querySelector('#btnBack').addEventListener('click', () =>{
+                appMain.innerHTML = ''
+    }); 
+  }
     
     document.querySelector('#createCircuit').addEventListener('click' , (e) => {
         e.preventDefault();
-        const appMain = document.querySelector('#app');
+        
         appMain.innerHTML = `
         <create-circuit></create-circuit>
         `;
+    
+    
     })
     
   }
