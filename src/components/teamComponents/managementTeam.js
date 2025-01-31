@@ -1,10 +1,10 @@
-class ManagePilots extends HTMLElement{
-    constructor(){
-        super();
-    }
+class ManagePilots extends HTMLElement {
+  constructor() {
+    super();
+  }
 
-    connectedCallback(){
-        this.innerHTML = `
+  connectedCallback() {
+    this.innerHTML = `
         <style> @import 'src/css/cardStyle.css'</style>
         <div class= "card">
             <a id="createTeam">
@@ -31,32 +31,45 @@ class ManagePilots extends HTMLElement{
             </a>
         </div>
         `;
-        const appMain = document.querySelector('#main');
-        
-        document.querySelector('#createTeam').addEventListener('click' , (e) => {
-        e.preventDefault();
-            
-        appMain.innerHTML = `
+    const appMain = document.querySelector("#main");
+
+    const btnBack = document.querySelector("#btnBack");
+    btnBack.dataset.ed = "3";
+    btnBack.addEventListener("click", () => {
+      if (btnBack.dataset.ed == 3) {
+        btnBack.dataset.ed = "1";
+        document.body.innerHTML = `
+                <management-component></management-component>`;
+      }
+    });
+
+    document.querySelector("#createTeam").addEventListener("click", (e) => {
+      e.preventDefault();
+      btnBack.dataset.ed = "1";
+
+      appMain.innerHTML = `
             <create-team></create-team>
             `;
-        });
+    });
 
-        document.querySelector('#editTeam').addEventListener('click' , (e) => {
-        e.preventDefault();
-        
-        appMain.innerHTML = `
+    document.querySelector("#editTeam").addEventListener("click", (e) => {
+      e.preventDefault();
+      btnBack.dataset.ed = "1";
+
+      appMain.innerHTML = `
         <edit-team></edit-team>
         `;
-        });
+    });
 
-        document.querySelector('#deleteTeam').addEventListener('click' , (e) => {
-            e.preventDefault();
-            
-            appMain.innerHTML = `
+    document.querySelector("#deleteTeam").addEventListener("click", (e) => {
+      e.preventDefault();
+      btnBack.dataset.ed = "1";
+
+      appMain.innerHTML = `
             <delete-team></delete-team>
             `;
-            });
-    }
+    });
+  }
 }
 
-customElements.define('manage-team', ManagePilots);
+customElements.define("manage-team", ManagePilots);

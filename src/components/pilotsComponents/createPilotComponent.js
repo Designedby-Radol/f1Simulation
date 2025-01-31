@@ -1,16 +1,16 @@
-class CreatePilot extends HTMLElement{
-    constructor(){
-        super();
-    }
+class CreatePilot extends HTMLElement {
+  constructor() {
+    super();
+  }
 
-    connectedCallback(){
-        this.innerHTML = `
+  connectedCallback() {
+    this.innerHTML = `
         <style>
         @import 'src/css/createStyle.css'
         </style>
         <div class="formCreate">
             <form id="myformSelectTeam">
-                <h1>Write Team and pilot</h1>
+                <h1>Write a Team to Add a Pilot</h1>
                 
                 <label for="teamName">Name</label>
                 <input type="text" id="teamName" name="name" required>
@@ -38,8 +38,17 @@ class CreatePilot extends HTMLElement{
             </form>
         </div>
         `;
+    const appMain = document.querySelector("#main");
 
-    }
+    const btnBack = document.querySelector("#btnBack");
+    btnBack.dataset.ed = "12";
+    btnBack.addEventListener("click", () => {
+      if (btnBack.dataset.ed == 12) {
+        btnBack.dataset.ed = "4";
+        appMain.innerHTML = `<manage-pilots></manage-pilots>`;
+      }
+    });
+  }
 }
 
-customElements.define('create-pilot', CreatePilot);
+customElements.define("create-pilot", CreatePilot);

@@ -26,7 +26,18 @@ class EditTeamComponent extends HTMLElement {
                 <button type="submit">Edit</button>
             </form>
         </div>
-        `;   
+        `;
+
+        const appMain = document.querySelector('#main');
+        
+        const btnBack = document.querySelector("#btnBack");
+        btnBack.dataset.ed = "11";
+        btnBack.addEventListener("click", () => {
+          if (btnBack.dataset.ed == 11) {
+            btnBack.dataset.ed = "3";
+            appMain.innerHTML = `<manage-team></manage-team>`;
+          }
+        });
   }
 }
 

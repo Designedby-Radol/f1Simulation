@@ -1,16 +1,16 @@
-class CreateTeam extends HTMLElement{
-    constructor(){
-        super();
-    }
+class CreateTeam extends HTMLElement {
+  constructor() {
+    super();
+  }
 
-    connectedCallback(){
-        this.innerHTML = `
+  connectedCallback() {
+    this.innerHTML = `
         <style>
         @import 'src/css/createStyle.css'
         </style>
         <div class="formCreate">
             <form id="myformCrearTeam">
-                <h1>Create Circuit</h1>
+                <h1>Create Team</h1>
         
                 <label for="teamName">Name</label>
                 <input type="text" id="teamName" name="name" required>
@@ -29,9 +29,18 @@ class CreateTeam extends HTMLElement{
             </form>
         </div>
         `;
-        
 
-    }
+        const appMain = document.querySelector('#main');
+        
+        const btnBack = document.querySelector("#btnBack");
+        btnBack.dataset.ed = "9";
+        btnBack.addEventListener("click", () => {
+          if (btnBack.dataset.ed == 9) {
+            btnBack.dataset.ed = "3";
+            appMain.innerHTML = `<manage-team></manage-team>`;
+          }
+        });
+  }
 }
 
-customElements.define('create-team', CreateTeam);
+customElements.define("create-team", CreateTeam);

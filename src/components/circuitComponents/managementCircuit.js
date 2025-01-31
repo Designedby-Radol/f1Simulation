@@ -1,10 +1,10 @@
-class ManageCircuit extends HTMLElement{
-    constructor(){
-        super();
-    }
+class ManageCircuit extends HTMLElement {
+  constructor() {
+    super();
+  }
 
-    connectedCallback(){
-        this.innerHTML = `
+  connectedCallback() {
+    this.innerHTML = `
         <style> @import 'src/css/cardStyle.css'</style>
         <div class= "card">
             <a id="createCircuit">
@@ -31,32 +31,44 @@ class ManageCircuit extends HTMLElement{
             </a>
         </div>
         `;
-        const appMain = document.querySelector('#main');
-        
-        document.querySelector('#createCircuit').addEventListener('click' , (e) => {
-        e.preventDefault();
-            
-        appMain.innerHTML = `
+    const appMain = document.querySelector("#main");
+
+    const btnBack = document.querySelector("#btnBack");
+    btnBack.dataset.ed = "2";
+    btnBack.addEventListener("click", () => {
+      if (btnBack.dataset.ed == 2) {
+        btnBack.dataset.ed = "1";
+        document.body.innerHTML = `
+                <management-component></management-component>`;
+      }
+    });
+
+    document.querySelector("#createCircuit").addEventListener("click", (e) => {
+      e.preventDefault();
+      btnBack.dataset.ed = "1";
+      appMain.innerHTML = `
             <create-circuit></create-circuit>
             `;
-        });
+    });
 
-        document.querySelector('#editCircuit').addEventListener('click' , (e) => {
-        e.preventDefault();
-        
-        appMain.innerHTML = `
-        <edit-circuit></edit-circuit>
+    document.querySelector("#editCircuit").addEventListener("click", (e) => {
+      e.preventDefault();
+      btnBack.dataset.ed = "1";
+      appMain.innerHTML = `
+            <edit-circuit></edit-circuit>
         `;
-        });
+    });
 
-        document.querySelector('#deleteCircuit').addEventListener('click' , (e) => {
-            e.preventDefault();
-            
-            appMain.innerHTML = `
+    document.querySelector("#deleteCircuit").addEventListener("click", (e) => {
+      e.preventDefault();
+      btnBack.dataset.ed = "1";
+      appMain.innerHTML = `
             <delete-circuit></delete-circuit>
             `;
-            });
-    }
+    });
+
+    //dataset 9 reservado para lista de circuitos
+  }
 }
 
-customElements.define('manage-circuit', ManageCircuit);
+customElements.define("manage-circuit", ManageCircuit);

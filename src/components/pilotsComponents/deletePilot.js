@@ -38,6 +38,16 @@ class DeletePilot extends HTMLElement {
             </form>
         </div>
         `;
+        const appMain = document.querySelector("#main");
+
+    const btnBack = document.querySelector("#btnBack");
+    btnBack.dataset.ed = "13";
+    btnBack.addEventListener("click", () => {
+      if (btnBack.dataset.ed == 13) {
+        btnBack.dataset.ed = "4";
+        appMain.innerHTML = `<manage-pilots></manage-pilots>`;
+      }
+    });
     }
 }
 

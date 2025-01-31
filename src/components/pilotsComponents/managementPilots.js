@@ -1,10 +1,10 @@
-class ManagePilots extends HTMLElement{
-    constructor(){
-        super();
-    }
+class ManagePilots extends HTMLElement {
+  constructor() {
+    super();
+  }
 
-    connectedCallback(){
-        this.innerHTML = `
+  connectedCallback() {
+    this.innerHTML = `
         <style> @import 'src/css/cardStyle.css'</style>
         <div class= "card">
             <a id="createPilot">
@@ -31,33 +31,43 @@ class ManagePilots extends HTMLElement{
             </a>
         </div>
         `;
-        
-        const appMain = document.querySelector('#main');
-        
-        document.querySelector('#createPilot').addEventListener('click' , (e) => {
-        e.preventDefault();
-            
-        appMain.innerHTML = `
+
+    const appMain = document.querySelector("#main");
+
+    const btnBack = document.querySelector("#btnBack");
+    btnBack.dataset.ed = "4";
+    btnBack.addEventListener("click", () => {
+      if (btnBack.dataset.ed == 4) {
+        btnBack.dataset.ed = "1";
+        document.body.innerHTML = `
+                <management-component></management-component>`;
+      }
+    });
+
+    document.querySelector("#createPilot").addEventListener("click", (e) => {
+      e.preventDefault();
+      btnBack.dataset.ed = "1";
+      appMain.innerHTML = `
             <create-pilot></create-pilot>
             `;
-        });
+    });
 
-        document.querySelector('#editPilot').addEventListener('click' , (e) => {
-        e.preventDefault();
-        
-        appMain.innerHTML = `
+    document.querySelector("#editPilot").addEventListener("click", (e) => {
+      e.preventDefault();
+      btnBack.dataset.ed = "1";
+      appMain.innerHTML = `
         <edit-pilot></edit-pilot>
         `;
-        });
+    });
 
-        document.querySelector('#deletePilot').addEventListener('click' , (e) => {
-            e.preventDefault();
-            
-            appMain.innerHTML = `
+    document.querySelector("#deletePilot").addEventListener("click", (e) => {
+      e.preventDefault();
+      btnBack.dataset.ed = "1";
+      appMain.innerHTML = `
             <delete-pilot></delete-pilot>
             `;
-            });
-    }
+    });
+  }
 }
 
-customElements.define('manage-pilots', ManagePilots);
+customElements.define("manage-pilots", ManagePilots);
