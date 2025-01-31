@@ -1,13 +1,13 @@
-/* Contenedor del formulario */
 body{
     height: 100%;
 }
 
-.formCreate {
+/* Contenedor del formulario */
+.formDelete {
     background: linear-gradient(145deg, rgba(0, 0, 0, 0.9), rgba(30, 30, 30, 0.8));
     border-radius: 15px;
     padding: 10px;
-    box-shadow: 0 0 20px #2cff05, 0 0 40px #2cff05;
+    box-shadow: 0 0 20px #FF073A, 0 0 40px #FF073A;
     width: 600px;
     max-width: 700px;
     height: auto;
@@ -16,15 +16,15 @@ body{
 }
 
 /* Título del formulario */
-.formCreate h1 {
-    color: #2cff05;
-    text-shadow: 0 0 10px #2cff05, 0 0 20px #2cff05, 0 0 30px #2cff05;
+.formDelete h1 {
+    color: #FF073A;
+    text-shadow: 0 0 10px #FF073A, 0 0 20px #FF073A, 0 0 30px #FF073A;
     font-size: 24px;
     margin-bottom: 20px;
 }
 
 /* Etiquetas de los inputs */
-.formCreate label {
+.formDelete label {
     display: block;
     font-size: 11px;
     margin: 10px 0 5px;
@@ -32,13 +32,13 @@ body{
 }
 
 /* Inputs y Textarea */
-.formCreate input, .formCreate textarea {
+.formDelete input, .formDelete textarea {
     width: 80%;
     max-width: 80%;
     max-height: 200px;
     padding: 8px;
     background-color: #1a1a1a;
-    border: 2px solid #2cff05;
+    border: 2px solid #FF073A;
     border-radius: 8px;
     color: white;
     font-size: 14px;
@@ -47,17 +47,17 @@ body{
 }
 
 /* Efecto de enfoque en los inputs */
-.formCreate input:focus, .formCreate textarea:focus {
-    box-shadow: 0 0 10px #2cff05, 0 0 20px #2cff05;
+.formDelete input:focus, .formDelete textarea:focus {
+    box-shadow: 0 0 10px #FF073A, 0 0 20px #FF073A;
     border-color: white;
 }
 
 /* Botón de envío */
-.formCreate button {
+.formDelete button {
     margin-top: 15px;
     width: 20%;
     padding: 12px;
-    background: #2cff05;
+    background: #FF073A;
     border: none;
     border-radius: 8px;
     color: white;
@@ -65,14 +65,14 @@ body{
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 0 10px #2cff05, 0 0 20px #2cff05;
+    box-shadow: 0 0 10px #FF073A, 0 0 20px #FF073A;
 }
 
 /* Efecto hover en el botón */
-.formCreate button:hover {
+.formDelete button:hover {
     background: white;
-    color: #2cff05;
-    box-shadow: 0 0 15px white, 0 0 30px #2cff05;
+    color: #FF073A;
+    box-shadow: 0 0 15px white, 0 0 30px #FF073A;
 }
 
 /* Animación de entrada */
@@ -88,7 +88,7 @@ body{
 }
 
 /* Aplicando la animación al formulario */
-#myformCrearCircuito {
+#myformDeleteCircuito {
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -96,27 +96,27 @@ body{
 
 /* Pantallas pequeñas (móviles) */
 @media (max-width: 600px) {
-    .formCreate {
+    .formDelete {
         padding: 20px;
         width: 70%;
         max-width: 100%;
     }
 
-    .formCreate h1 {
+    .formDelete h1 {
         font-size: 20px;
     }
 
-    .formCreate label {
+    .formDelete label {
         font-size: 10px;
     }
 
-    .formCreate input, .formCreate textarea {
+    .formDelete input, .formDelete textarea {
         font-size: 16px;
         padding: 12px;
         width: 60%;
     }
 
-    .formCreate button {
+    .formDelete button {
         font-size: 16px;
         padding: 15px;
     }
@@ -124,26 +124,26 @@ body{
 
 /* Pantallas medianas (tabletas) */
 @media (max-width: 1024px) {
-    .formCreate {
+    .formDelete {
         padding: 25px;
         width: 80%;
         max-width: 90%;
     }
 
-    .formCreate h1 {
+    .formDelete h1 {
         font-size: 22px;
     }
 
-    .formCreate label {
+    .formDelete label {
         font-size: 15px;
     }
 
-    .formCreate input, .formCreate textarea {
+    .formDelete input, .formDelete textarea {
         font-size: 15px;
         padding: 10px;
     }
 
-    .formCreate button {
+    .formDelete button {
         font-size: 17px;
         padding: 14px;
     }
@@ -151,22 +151,22 @@ body{
 
 /* Pantallas grandes (escritorios) */
 @media (min-width: 1200px) {
-    .formCreate {
+    .formDelete {
         padding: 30px;
         width: 600px;
         max-width: 700px;
     }
 
-    .formCreate h1 {
+    .formDelete h1 {
         font-size: 24px;
     }
 
-    .formCreate input, .formCreate textarea {
+    .formDelete input, .formDelete textarea {
         font-size: 14px;
         padding: 10px;
     }
 
-    .formCreate button {
+    .formDelete button {
         font-size: 18px;
         padding: 12px;
     }

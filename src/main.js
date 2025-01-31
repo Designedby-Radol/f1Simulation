@@ -5,8 +5,24 @@ import './css/start.css'
 
 // Components
 
-import './components/createComponent.js';
-import './components/createComponents/createCircuitComponent.js';
+
+import './components/managementComponent.js'
+
+import './components/circuitComponents/managementCircuit.js'
+import './components/circuitComponents/createCircuitComponent.js';
+import './components/circuitComponents/editCircuit.js';
+import './components/circuitComponents/deleteCircuit.js'
+
+import './components/teamComponents/managementTeam.js'
+import './components/teamComponents/createTeamComponent.js';
+import './components/teamComponents/editTeam.js';
+import './components/teamComponents/deleteTeam.js'
+
+import './components/pilotsComponents/managementPilots.js'
+import './components/pilotsComponents/createPilotComponent.js';
+import './components/pilotsComponents/editPilot.js';
+import './components/pilotsComponents/deletePilot.js'
+
 
 document.querySelector('body').innerHTML = `
   <div class="FirstPage">
@@ -55,21 +71,10 @@ startComponentButton.addEventListener('click' , (e) =>{
 
   </main>
   `;
-
-  let contAtras = 1
-  if (contAtras === 1){
-    const btnBack = document.querySelector('#btnBack').addEventListener('click', () =>{
-      location.reload();  
-    }); 
-  }
-  
- 
-
   const createButton = document.querySelector('#create').addEventListener('click', (e) => {
     e.preventDefault();
-    
     const appMain = document.querySelector('#main');
-    appMain.innerHTML = '<create-component></create-component>'
+    appMain.innerHTML = '<management-component></management-component>'
 
   })
 })
