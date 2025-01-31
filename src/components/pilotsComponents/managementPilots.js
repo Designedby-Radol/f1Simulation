@@ -1,0 +1,63 @@
+class ManagePilots extends HTMLElement{
+    constructor(){
+        super();
+    }
+
+    connectedCallback(){
+        this.innerHTML = `
+        <style> @import 'src/css/cardStyle.css'</style>
+        <div class= "card">
+            <a id="createPilot">
+                <h1>Create Pilot</h1>
+                <p>Create a pilote to race and participate in competitions.</p>
+            </a>
+        </div>
+        <div class= "card">
+            <a id="editPilot">
+                <h1>Edit Pilot</h1>
+                <p>Edit a pilot that is already part of the simulator.</p>
+            </a>
+        </div>
+        <div class= "card">
+            <a id="deletePilot">
+                <h1>Delete Pilot</h1>
+                <p>Delete a pilot to stop participating in the team and simulator.</p>
+            </a>
+            </div>
+        <div class= "card">
+            <a id="listPilots">
+                <h1>List Pilots</h1>
+                <p>List pilots that are ready to be part of the simulator.</p>
+            </a>
+        </div>
+        `;
+        
+        const appMain = document.querySelector('#main');
+        
+        document.querySelector('#createPilot').addEventListener('click' , (e) => {
+        e.preventDefault();
+            
+        appMain.innerHTML = `
+            <create-pilot></create-pilot>
+            `;
+        });
+
+        document.querySelector('#editPilot').addEventListener('click' , (e) => {
+        e.preventDefault();
+        
+        appMain.innerHTML = `
+        <edit-pilot></edit-pilot>
+        `;
+        });
+
+        document.querySelector('#deletePilot').addEventListener('click' , (e) => {
+            e.preventDefault();
+            
+            appMain.innerHTML = `
+            <delete-pilot></delete-pilot>
+            `;
+            });
+    }
+}
+
+customElements.define('manage-pilots', ManagePilots);
