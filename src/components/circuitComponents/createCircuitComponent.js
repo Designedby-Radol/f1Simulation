@@ -1,10 +1,10 @@
-class CreateCircuit extends HTMLElement{
-    constructor(){
-        super();
-    }
+class CreateCircuit extends HTMLElement {
+  constructor() {
+    super();
+  }
 
-    connectedCallback(){
-        this.innerHTML = `
+  connectedCallback() {
+    this.innerHTML = `
         <style>
         @import 'src/css/createStyle.css'
         </style>
@@ -34,9 +34,18 @@ class CreateCircuit extends HTMLElement{
             </form>
         </div>
         `;
-        
 
-    }
+    const appMain = document.querySelector('#main');
+
+    const btnBack = document.querySelector("#btnBack");
+    btnBack.dataset.ed = "6";
+    btnBack.addEventListener("click", () => {
+      if (btnBack.dataset.ed == 6) {
+        btnBack.dataset.ed = "2";
+        appMain.innerHTML = `<manage-circuit></manage-circuit>`;
+      }
+    });
+  }
 }
 
-customElements.define('create-circuit', CreateCircuit);
+customElements.define("create-circuit", CreateCircuit);

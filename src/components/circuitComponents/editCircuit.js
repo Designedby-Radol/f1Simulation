@@ -31,7 +31,18 @@ class EditCircuitComponent extends HTMLElement {
                 <button type="submit">Update</button>
             </form>
         </div>
-        `;   
+        `;
+
+    const appMain = document.querySelector('#main');
+
+    const btnBack = document.querySelector("#btnBack");
+    btnBack.dataset.ed = "8";
+    btnBack.addEventListener("click", () => {
+      if (btnBack.dataset.ed == 8) {
+        btnBack.dataset.ed = "2";
+        appMain.innerHTML = `<manage-circuit></manage-circuit>`;
+      }
+    });
   }
 }
 

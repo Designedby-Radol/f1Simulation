@@ -29,6 +29,17 @@ class DeleteTeam extends HTMLElement {
             </form>
         </div>
         `;
+
+        const appMain = document.querySelector('#main');
+        
+        const btnBack = document.querySelector("#btnBack");
+        btnBack.dataset.ed = "10";
+        btnBack.addEventListener("click", () => {
+          if (btnBack.dataset.ed == 10) {
+            btnBack.dataset.ed = "3";
+            appMain.innerHTML = `<manage-team></manage-team>`;
+          }
+        });
     }
 }
 

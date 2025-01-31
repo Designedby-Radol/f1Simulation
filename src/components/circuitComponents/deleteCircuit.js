@@ -1,10 +1,10 @@
 class DeleteCircuit extends HTMLElement {
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    connectedCallback(){
-        this.innerHTML = `
+  connectedCallback() {
+    this.innerHTML = `
         <style>
         @import 'src/css/deleteStyle.css'
         </style>
@@ -34,7 +34,17 @@ class DeleteCircuit extends HTMLElement {
             </form>
         </div>
         `;
-    }
+    const appMain = document.querySelector('#main');
+
+    const btnBack = document.querySelector("#btnBack");
+    btnBack.dataset.ed = "7";
+    btnBack.addEventListener("click", () => {
+      if (btnBack.dataset.ed == 7) {
+        btnBack.dataset.ed = "3";
+        appMain.innerHTML = `<manage-circuit></manage-circuit>`;
+      }
+    });
+  }
 }
 
-customElements.define('delete-circuit', DeleteCircuit)
+customElements.define("delete-circuit", DeleteCircuit);
