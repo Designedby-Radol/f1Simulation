@@ -18,10 +18,6 @@ class CreateTeam extends HTMLElement {
                 <label for="teamCountry">Country</label>
                 <input type="text" id="teamCountry" name="country" required>
 
-                <label for="teamBranch">Branch</label>
-                <input type="text" id="teamBranch" name="branch" required>
-
-
                 <label for="teamImage">Image URL</label>
                 <input type="url" id="teamImage" name="image" required>
 
@@ -40,6 +36,27 @@ class CreateTeam extends HTMLElement {
             appMain.innerHTML = `<manage-team></manage-team>`;
           }
         });
+
+        this.querySelector("#myformCrearTeam").addEventListener("submit", async(e)=>{
+          e.preventDefault();
+          let data = Object.fromEntries(new FormData(e.target));
+          data.pilots = []
+          const formattedData = JSON.stringify(data); 
+          try {
+              const response = await fetch("http://localhost:3000/teams", {
+                  method: "POST",
+                  headers: {
+                      "Content-Type": "application/json"
+                  },
+                  body: formattedData
+              });
+              console.log("Producto creado:", formattedData);
+              alert("Producto agregado con éxito!");
+          } catch (error) {
+              console.error("Error al enviar datos:", error);
+              alert("pipipi")
+          }
+      })
   }
 }
 

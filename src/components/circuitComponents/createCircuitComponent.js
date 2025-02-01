@@ -45,6 +45,8 @@ class CreateCircuit extends HTMLElement {
         appMain.innerHTML = `<manage-circuit></manage-circuit>`;
       }
     });
+
+    
   }
 }
 
