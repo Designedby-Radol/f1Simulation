@@ -5,7 +5,6 @@ class ManageCircuit extends HTMLElement {
 
   connectedCallback() {
     this.innerHTML = `
-        <style> @import 'src/css/cardStyle.css'</style>
         <div class= "card">
             <a id="createCircuit">
                 <h1>Create Circuit</h1>

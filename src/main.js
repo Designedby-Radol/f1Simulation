@@ -1,6 +1,5 @@
 import f1LogoW from './f1WhiteLogo.svg'
 import './css/style.css'
-import './css/start.css'
 
 
 // Components

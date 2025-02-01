@@ -7,12 +7,15 @@ class MainComponent extends HTMLElement{
         const body = document.querySelector('body');
         body.innerHTML='';
         body.innerHTML = `
-            <main id="main">
-                <a class="cardInit" id="create">
+        <style>
+        @import 'src/css/cardStyle.css'
+        </style>
+            <main class="main" id="main">
+                <a class="card" id="create">
                     <h1>Admin</h1>
                     <p>Modify the content of the game.</p>
                 </a>
-                <a class="cardInit" id="play">
+                <a class="card" id="play">
                     <h1>Player</h1>
                     <p>Play the game.</p>
                 </a>

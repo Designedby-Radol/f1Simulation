@@ -1,41 +1,131 @@
+html{
+  height: 100%;
+}
+
+
 body {
   margin: 0;
   padding: 0;
-  background-color: black;
-  font-family: Arial, sans-serif;
+  background: url('src/services/wallpaperF1.jpg') no-repeat center/cover;
+  backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
+  font-family: Arial, sans-serif;
   color: white;
-  cursor: default;
+  cursor: url('src/services/cursor.png'), auto ;
 }
 
-.FirstPage {
+
+
+@media (max-width: 600px) {
+  body {
+      flex-wrap: wrap;
+      gap: 10px;
+      height: 100%;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 60px;
+}
+
+#btnBack {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-size: 16px;
+  color: white;
+  background: transparent;
+  border: 2px solid red;
+  border-radius: 50%;
+  text-transform: uppercase;
+  transition: 0.3s;
+  box-shadow: 0 0 10px red, 0 0 20px red;
+}
+
+#btnBack::before {
+  content: "<";
+  font-size: 22px;
+}
+
+#btnBack:hover {
+  background: red;
+  color: black;
+  box-shadow: 0 0 20px red, 0 0 40px red;
+  transform: scale(1.1);
+}
+
+input , textarea , label , button{
+  cursor: url('src/services/flag.png'), auto ;
+}
+
+#main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.FirstPage, .cardInit {
   text-align: center;
-  padding: 30px;
+  padding: 20px;
   border-radius: 15px;
   background: rgba(66, 2, 2, 0.8);
   box-shadow: 0 0 10px red, 0 0 30px red;
   max-width: 500px;
   width: 100%;
-  overflow: hidden;
   position: relative;
-  z-index: 1; /* Asegura que los elementos dentro de FirstPage estén por encima de ::before */
+  overflow: hidden;
+  transition: 0.3s;
 }
 
-.FirstPage h1 {
-  font-size: 32px;
+.FirstPage h1, .cardInit h1 {
+  font-size: 24px;
   text-transform: uppercase;
   text-shadow: 0 0 5px red, 0 0 10px red;
   margin: 20px 0;
+  color: black;
 }
 
-.FirstPage p {
-  font-size: 18px;
+.FirstPage p, .cardInit p {
+  font-size: 14px;
   opacity: 0.8;
-  margin: 15px 0;
   text-shadow: 0 0 3px red, 0 0 5px red;
+}
+
+.cardInit {
+  width: 220px;
+}
+
+.FirstPage::before, .cardInit::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 250%;
+  height: 250%;
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.4) 10%, transparent 50%);
+  transform: rotate(30deg);
+  transition: 0.5s;
+  z-index: -1;
+}
+
+.FirstPage:hover::before, .cardInit:hover::before {
+  top: 0%;
+  left: 0%;
+}
+
+.cardInit:hover, .FirstPage:hover {
+  box-shadow: 0 0 20px red, 0 0 40px red;
+  transform: scale(1.05);
 }
 
 .card button {
@@ -46,10 +136,10 @@ body {
   font-size: 18px;
   text-transform: uppercase;
   border-radius: 10px;
-  cursor: pointer;
   font-weight: bold;
   transition: 0.3s;
   box-shadow: 0 0 10px red, 0 0 20px red;
+  cursor: url('src/services/flag.png'), auto ;
 }
 
 .card button:hover {
@@ -57,38 +147,4 @@ body {
   color: black;
   box-shadow: 0 0 20px red, 0 0 40px red;
   transform: scale(1.1);
-}
-
-.FirstPage .logo {
-  width: 100px;
-  margin-bottom: 20px;
-  transition: 0.3s;
-}
-
-.FirstPage .logo:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 15px red, 0 0 30px red;
-}
-
-.FirstPage a {
-  text-decoration: none;
-}
-
-.FirstPage::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 250%;
-  height: 250%;
-  background: radial-gradient(circle, rgba(255, 0, 0, 0.4) 10%, transparent 50%);
-  transform: rotate(30deg);
-  transition: 0.5s ease-in-out;
-  pointer-events: none; /* Previene que la capa ::before interfiera con los clics */
-  z-index: -1; /* Asegura que ::before quede por detrás de los elementos interactivos */
-}
-
-.FirstPage:hover::before {
-  top: 0%;
-  left: 0%;
 }

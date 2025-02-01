@@ -1,15 +1,15 @@
 class ManagementComponent extends HTMLElement {
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    connectedCallback(){
-        document.body.innerHTML = `  
+  connectedCallback() {
+    document.body.innerHTML = `  
+        <style> @import 'src/css/cardStyle.css'</style>
         <header class="header">
             <a id="btnBack"></a>
         </header>
   
-        <style> @import 'src/css/cardStyle.css'</style>
         <main id="main">
         <div class= "card">
             <a id="manageCircuit">
@@ -37,46 +37,44 @@ class ManagementComponent extends HTMLElement {
         </div>
         </main>
         
-        `; 
-       
-        const appMain = document.querySelector('#main');
-        
-        const btnBack = document.querySelector('#btnBack')
-        btnBack.dataset.ed = "1";
-        btnBack.addEventListener('click' , () =>{
-            if(btnBack.dataset.ed== 1){
-                btnBack.dataset.ed = "0";
-                document.body.innerHTML = `
-                <main-component></main-component>`
-          
-            }
-        })
+        `;
 
-        document.querySelector('#manageCircuit').addEventListener('click' , (e) => {
-            e.preventDefault();
-            btnBack.dataset.ed = "0";
-            appMain.innerHTML = `
+    const appMain = document.querySelector("#main");
+
+    const btnBack = document.querySelector("#btnBack");
+    btnBack.dataset.ed = "1";
+    btnBack.addEventListener("click", () => {
+      if (btnBack.dataset.ed == 1) {
+        btnBack.dataset.ed = "0";
+        document.body.innerHTML = `
+                <main-component></main-component>`;
+      }
+    });
+
+    document.querySelector("#manageCircuit").addEventListener("click", (e) => {
+      e.preventDefault();
+      btnBack.dataset.ed = "0";
+      appMain.innerHTML = `
             <manage-circuit></manage-circuit>
             `;
-            
-        });
-        document.querySelector('#manageTeam').addEventListener('click' , (e) => {
-            e.preventDefault();
-            btnBack.dataset.ed = "0";
-            appMain.innerHTML = `
+    });
+    document.querySelector("#manageTeam").addEventListener("click", (e) => {
+      e.preventDefault();
+      btnBack.dataset.ed = "0";
+      appMain.innerHTML = `
             <manage-team></manage-team>
             `;
-        });
-        document.querySelector('#managePilots').addEventListener('click' , (e) => {
-            e.preventDefault();
-            btnBack.dataset.ed = "0";
-            appMain.innerHTML = `
+    });
+    document.querySelector("#managePilots").addEventListener("click", (e) => {
+      e.preventDefault();
+      btnBack.dataset.ed = "0";
+      appMain.innerHTML = `
             <manage-pilots></manage-pilots>
             `;
-        });
+    });
 
-        //espacio reservado para pilotos, dataset.ed == 5
-    }
+    //espacio reservado para pilotos, dataset.ed == 5
+  }
 }
 
-customElements.define('management-component', ManagementComponent);
+customElements.define("management-component", ManagementComponent);
