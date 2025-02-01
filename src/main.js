@@ -1,12 +1,28 @@
 import f1LogoW from './f1WhiteLogo.svg'
 import './css/style.css'
-import './css/start.css'
 
 
 // Components
 
-import './components/createComponent.js';
-import './components/createComponents/createCircuitComponent.js';
+
+import './components/managementComponent.js'
+import './components/mainComponent.js'
+
+import './components/circuitComponents/managementCircuit.js'
+import './components/circuitComponents/createCircuitComponent.js';
+import './components/circuitComponents/editCircuit.js';
+import './components/circuitComponents/deleteCircuit.js'
+
+import './components/teamComponents/managementTeam.js'
+import './components/teamComponents/createTeamComponent.js';
+import './components/teamComponents/editTeam.js';
+import './components/teamComponents/deleteTeam.js'
+
+import './components/pilotsComponents/managementPilots.js'
+import './components/pilotsComponents/createPilotComponent.js';
+import './components/pilotsComponents/editPilot.js';
+import './components/pilotsComponents/deletePilot.js'
+
 
 document.querySelector('body').innerHTML = `
   <div class="FirstPage">
@@ -27,49 +43,7 @@ document.querySelector('body').innerHTML = `
 const startComponentButton = document.querySelector('#startComponent')
 startComponentButton.addEventListener('click' , (e) =>{
   e.preventDefault()
-  document.body.classList.add("fade-out")
-
-  setTimeout(() => {
-    const body = document.querySelector('body');
-  }, 1000);
-
   const body = document.querySelector('body');
-  body.innerHTML='';
-
-  body.innerHTML = `
-  <header class="header">
-  <a id="btnBack"></a>
-  </header>
-  
-
-  <main id="main">
- 
-  <a class="cardInit" id="create">
-    <h1>Admin</h1>
-    <p>Modify the content of the game.</p>
-</a>
-<a class="cardInit" id="play">
-    <h1>Player</h1>
-    <p>Play the game.</p>
-</a>
-
-  </main>
-  `;
-
-  let contAtras = 1
-  if (contAtras === 1){
-    const btnBack = document.querySelector('#btnBack').addEventListener('click', () =>{
-      location.reload();  
-    }); 
-  }
-  
- 
-
-  const createButton = document.querySelector('#create').addEventListener('click', (e) => {
-    e.preventDefault();
-    
-    const appMain = document.querySelector('#main');
-    appMain.innerHTML = '<create-component></create-component>'
-
-  })
+  body.innerHTML=
+  `<main-component></main-component>`;
 })
