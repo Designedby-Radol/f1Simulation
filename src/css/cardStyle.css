@@ -1,4 +1,10 @@
+html{
+    height: 100%;
+  }
 
+  #main{
+    gap: 0;
+  }
 
 .card {
     background: linear-gradient(145deg, rgba(0, 0, 0, 0.9), rgba(40, 40, 40, 0.8));
@@ -72,6 +78,10 @@
 }
 
 @media (max-width: 768px) {
+
+    body{
+        height: 100%;
+    }
     .card {
         width: 200px;
         padding: 15px;
