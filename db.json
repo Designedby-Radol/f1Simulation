@@ -18,6 +18,12 @@
           "id": 1,
           "name": "Max Verstappen",
           "role": "Líder"
+        },
+        {
+          "id": "1",
+          "name": "sa",
+          "role": "asd",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjUTHXilvg23twEQyqCTdfgs9uOqsbmp0pMw&s"
         }
       ],
       "img": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Red_Bull_Racing_Logo.svg",
@@ -28,14 +34,14 @@
       "name": "Sebastian Visbal",
       "country": "colombia",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjUTHXilvg23twEQyqCTdfgs9uOqsbmp0pMw&s",
-      "pilots": []
-    },
-    {
-      "id": "92f7",
-      "name": "losJholve",
-      "country": "JholverLandia",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjUTHXilvg23twEQyqCTdfgs9uOqsbmp0pMw&s",
-      "pilots": []
+      "pilots": [
+        {
+          "id": "1",
+          "name": "Carlos",
+          "role": "Leader",
+          "image": "https://static.wikia.nocookie.net/minibeatpowerockersfandomcom/images/f/fe/Carlos.png/revision/latest/thumbnail/width/360/height/360?cb=20190617000331&path-prefix=es"
+        }
+      ]
     }
   ],
   "circuits": [

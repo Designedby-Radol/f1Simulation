@@ -73,7 +73,7 @@ class ManagementComponent extends HTMLElement {
             `;
     });
 
-    //espacio reservado para pilotos, dataset.ed == 5
+    //espacio reservado para carros, dataset.ed == 5
   }
 }
 

@@ -11,16 +11,18 @@ class DeleteTeam extends HTMLElement {
         <div class="formDelete">
             <form id="myformDeleteTeam">
                 <h1>Delete Team</h1>
+
+                <label for="teamSearch">Search</label>
+                <input type="text" id="searchDelete" required>
+
+                <label for="teamName">ID</label>
+                <input type="text" id="teamName" name="id" disabled>
         
                 <label for="teamName">Name</label>
                 <input type="text" id="teamName" name="name" required>
 
                 <label for="teamCountry">Country</label>
                 <input type="text" id="teamCountry" name="country" disabled>
-
-                <label for="teamBranch">Branch</label>
-                <input type="text" id="teamBranch" name="branch" disabled>
-
 
                 <label for="teamImage">Image URL</label>
                 <input type="url" id="teamImage" name="image" disabled>
@@ -42,17 +44,17 @@ class DeleteTeam extends HTMLElement {
 
         });
 
-        this.querySelector("#searchEdit").addEventListener('input', async (e) => {
+        this.querySelector("#searchDelete").addEventListener('input', async (e) => {
             let textSearch = e.target.value;
             const result = await this.searchTeam(textSearch);
             if(result){
-                this.editForm(result);
+                this.deleteForm(result);
             }else {
                 this.clearForm();
             }
         });
   
-        this.querySelector("#myformEditTeam").addEventListener('submit', (e)=>{
+        this.querySelector("#myformDeleteTeam").addEventListener('submit', (e)=>{
             e.preventDefault()
             const formData = Object.fromEntries(new FormData(e.target)); 
             var teamID = this.querySelector('input[name="id"]').value;
@@ -87,7 +89,7 @@ class DeleteTeam extends HTMLElement {
     async updateData(id,data){
         try {
             const result = await fetch(`http://localhost:3000/teams/${id}`, {
-                method: "PATCH",
+                method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
                 },

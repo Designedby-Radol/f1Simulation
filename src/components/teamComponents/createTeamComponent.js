@@ -50,8 +50,8 @@ class CreateTeam extends HTMLElement {
                   },
                   body: formattedData
               });
-              console.log("Producto creado:", formattedData);
-              alert("Producto agregado con éxito!");
+              console.log("Team created:", formattedData);
+              alert("Team created successfully!");
           } catch (error) {
               console.error("Error al enviar datos:", error);
               alert("pipipi")
