@@ -1,88 +1,96 @@
 {
-    "equipos": [
-        {
-            "nombre": "Red Bull Racing",
-            "pais": "Austria",
-            "motor": "Honda",
-            "pilotos": [
-                {
-                    "id": 1,
-                    "nombre": "Max Verstappen",
-                    "equipo": "Red Bull Racing",
-                    "rol": "Líder"
-                },
-                {
-                    "id": 1,
-                    "nombre": "Max Verstappen",
-                    "equipo": "Red Bull Racing",
-                    "rol": "Líder"
-                },
-                {
-                    "id": 1,
-                    "nombre": "Max Verstappen",
-                    "equipo": "Red Bull Racing",
-                    "rol": "Líder"
-                }
-            ],
-            "imagen": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Red_Bull_Racing_Logo.svg"
-        }
+    "teams": [
+      {
+        "name": "Red Bull Racing",
+        "country": "Austria",
+        "pilots": [
+          {
+            "id": 1,
+            "name": "Max Verstappen",
+            "role": "Líder"
+          },
+          {
+            "id": 1,
+            "name": "Max Verstappen",
+            "role": "Líder"
+          },
+          {
+            "id": 1,
+            "name": "Max Verstappen",
+            "role": "Líder"
+          }
+        ],
+        "img": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Red_Bull_Racing_Logo.svg",
+        "id": "53c5"
+      },
+      {
+        "id": "a213",
+        "name": "Sebastian Visbal",
+        "country": "colombia",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjUTHXilvg23twEQyqCTdfgs9uOqsbmp0pMw&s",
+        "pilots": []
+      },
+      {
+        "id": "92f7",
+        "name": "losJholve",
+        "country": "JholverLandia",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjUTHXilvg23twEQyqCTdfgs9uOqsbmp0pMw&s",
+        "pilots": []
+      }
     ],
-    "circuitos": [
-        {
-            "nombre": "Silverstone",
-            "pais": "Reino Unido",
-            "longitud_km": 5.89,
-            "vueltas": 52,
-            "descripcion": "Uno de los circuitos más rápidos del calendario, con curvas de alta velocidad como Maggotts y Becketts.",
-            "record_vuelta": {
-                "tiempo": "1:27.097",
-                "piloto": "Max Verstappen",
-                "año": 2020
-            },
-            "ganadores": [
-                {
-                    "temporada": 2021,
-                    "piloto": 3
-                },
-                {
-                    "temporada": 2022,
-                    "piloto": 5
-                },
-                {
-                    "temporada": 2023,
-                    "piloto": 1
-                }
-            ],
-            "imagen": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Silverstone_Circuit_2020_layout.png"
-        }
+    "circuits": [
+      {
+        "name": "Silverstone",
+        "country": "Reino Unido",
+        "length": 5.89,
+        "laps": 52,
+        "description": "Uno de los circuitos más rápidos del calendario, con curvas de alta velocidad como Maggotts y Becketts.",
+        "lap_record": {
+          "time": "1:27.097",
+          "pilot": "Max Verstappen",
+          "year": 2020
+        },
+        "winners": [
+          {
+            "season": 2021,
+            "pilot": 3
+          },
+          {
+            "season": 2022,
+            "pilot": 5
+          },
+          {
+            "season": 2023,
+            "pilot": 1
+          }
+        ],
+        "img": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Silverstone_Circuit_2020_layout.png",
+        "id": "9178"
+      }
     ],
-    "vehiculos": [
-        {
-            "equipo": "Red Bull Racing",
-            "modelo": "RB20",
-            "motor": "Honda",
-            "velocidad_maxima_kmh": 360,
-            "aceleracion_0_100": 2.5,
-            "pilotos": [
-                1,
-                2
-            ],
-            "rendimiento": {
-                "conduccion_normal": {
-                    "velocidad_promedio_kmh": 320,
-                    "consumo_combustible": {
-                        "seco": 1.9,
-                        "lluvioso": 2.1,
-                        "extremo": 2.4
-                    },
-                    "desgaste_neumaticos": {
-                        "seco": 1.5,
-                        "lluvioso": 0.8,
-                        "extremo": 2.5
-                    }
-                }
+    "cars": [
+      {
+        "model": "RB20",
+        "motor": "Honda",
+        "pilot":1,
+          "performance": {
+            "acceleration_ZtoH": 2.5,
+            "max_speed_kmh": 360,
+            "average_Speed": 320,
+            "fuel_consumption": {
+              "dry": 1.9,
+              "rainy": 2.1,
+              "extreme": 2.4
             },
-            "imagen": "https://upload.wikimedia.org/wikipedia/commons/8/89/Max_Verstappen_2023_Austria_FP2_%28cropped%29.jpg"
-        }
+            "tire_wear": {
+              "dry": 1.5,
+              "rainy": 0.8,
+              "extreme": 2.5
+            }
+          
+        },
+        "img": "https://upload.wikimedia.org/wikipedia/commons/8/89/Max_Verstappen_2023_Austria_FP2_%28cropped%29.jpg",
+        "id": "e161"
+      }
     ]
-}
+  }
