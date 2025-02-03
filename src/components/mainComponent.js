@@ -28,10 +28,11 @@ class MainComponent extends HTMLElement{
             appMain.innerHTML = '<management-component></management-component>'
             delete btnBack.dataset.id
         })
+        
         const playButton = document.querySelector('#play').addEventListener('click', (e) => {
             e.preventDefault();
             const appMain = document.querySelector('#main');
-            appMain.innerHTML = '<management-component></management-component>'
+            appMain.innerHTML = '<simulate-card></simulate-card>'
             delete btnBack.dataset.id
         })
     }

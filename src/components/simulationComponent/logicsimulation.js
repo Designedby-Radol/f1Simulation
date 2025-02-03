@@ -90,7 +90,7 @@ class SingleDriverRace {
 
 
 // ejemplo de uso : 
-const monza = new Circuit("Monza", 2, 8.000, "dry");
+const monza = new Circuit("Monza", 3, 8.000, "extreme");
 const car = new Car(2.6, 340, 450);
 const driver = new Driver("Max Verstappen", 1, car);
 const race = new SingleDriverRace(monza, driver);
