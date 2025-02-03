@@ -4,7 +4,6 @@ import './css/style.css'
 
 // Components
 
-
 import './components/managementComponent.js'
 import './components/mainComponent.js'
 
