@@ -3,7 +3,6 @@ body{
     display: flex;
     flex-direction: column;
 }
-
 body:first-child{
     height: 150px;
 }
@@ -12,17 +11,26 @@ body:first-child{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    margin-top: 50px;
+}
+
+.list-card{
+  display: flex;
+  border-radius: 10px;
+  background-color: #1E1E1E;
 }
 
 article {
+    margin-left: 20px;
     position: relative;
     width: 250px;
     transition: all 0.3s ease;
   }
+
   
   article img:first-child {
-    box-shadow: 0 60px 60px -60x rgba(0, 30, 255, 0.5);
-    border-radius: 4px;
+    background-color: black;
+    border-radius: 8px;
     object-fit: cover;
     width: 100%;
   }
@@ -44,17 +52,15 @@ article {
   }
   
   article::before {
-    content: "";
+    content: attr(data-circuit-description);
     position: absolute;
     bottom: 0;
     height: 100%;
     width: 100%;
-    background-image: linear-gradient(
-      to bottom,
-      transparent 10%,
-      rgba(0, 0, 0, 0.5) 50%,
-      rgba(0, 0, 0) 95%
-    );
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
     opacity: 0;
     transition: all 0.3s ease;
   }
