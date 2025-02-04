@@ -4,7 +4,7 @@ import './css/style.css'
 
 // Components
 
-
+import './components/simulationComponent/mainSimulation.js'
 import './components/managementComponent.js'
 import './components/mainComponent.js'
 
