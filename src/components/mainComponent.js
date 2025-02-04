@@ -7,9 +7,11 @@ class MainComponent extends HTMLElement{
         const body = document.querySelector('body');
         body.innerHTML='';
         body.innerHTML = `
+<<<<<<< HEAD
         <style>
         @import 'src/css/cardStyle.css'
         </style>
+
             <main class="main" id="main">
                 <a class="card" id="create">
                     <h1>Admin</h1>

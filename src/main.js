@@ -23,8 +23,14 @@ import './components/pilotsComponents/createPilotComponent.js';
 import './components/pilotsComponents/editPilot.js';
 import './components/pilotsComponents/deletePilot.js'
 
+import './components/carComponent/managementCars.js'
+import './components/carComponent/addCar.js'
+import './components/carComponent/editCar.js'
+import './components/carComponent/deleteCar.js'
 
 document.querySelector('body').innerHTML = `
+  <video src="url('https://drive.google.com/file/d/1hDhhlipD5pnwKerfcMuAN6CaicaBczDO/view?usp=sharing')" autoplay muted loop id="background-video"></video>
+
   <div class="FirstPage">
     <a href="https://www.formula1.com/" target="_blank">
       <img src="${f1LogoW}" class="logo" alt="Vite logo" />
