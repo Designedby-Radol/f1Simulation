@@ -1,13 +1,6 @@
 /* Formulario para crear tarjeta de vehiculo */
 
-.header{
-    width: 20%;
-    flex-direction: row;
-}
 
-#main{
-    width: 80%;
-}
 
 .formEdit {
   position: relative;

@@ -1,4 +1,4 @@
-class ListCars extends HTMLElement{
+class ListPilots extends HTMLElement{
     constructor(){
         super();
     }
@@ -18,13 +18,9 @@ class ListCars extends HTMLElement{
     btnBack.dataset.ed = "9";
     btnBack.addEventListener("click", () => {
       if (btnBack.dataset.ed == 9) {
-        btnBack.dataset.ed = "5";
-        appMain.innerHTML = `<manage-cars></manage-cars>`;
+        btnBack.dataset.ed = "2";
+        appMain.innerHTML = `<manage-pilots></manage-pilots>`;
       }
-
-    document.querySelector('.list-card').addEventListener('click', (e) =>{
-        console.log(e.target.dataset.tid);
-    })
     });
 
     this.listCircuits();
@@ -32,7 +28,7 @@ class ListCars extends HTMLElement{
 
   async getCircuits() {
     try {
-      const response = await fetch("http://localhost:3000/cars");
+      const response = await fetch("http://localhost:3000/teams");
       if (!response.ok) {
         throw new Error("We could not obtain the cars.");
       }
@@ -46,28 +42,32 @@ class ListCars extends HTMLElement{
   async listCircuits() {
     const data = await this.getCircuits();
     const cardContainer = this.querySelector("#cardListedContainer");
-    data.forEach((car) => {
-      const carCard = document.createElement("article");
-      carCard.className = "list-card";
-      carCard.dataset.carid = `${car.id}`;
+    data.forEach((team) => {
+      const teamCard = document.createElement("article");
+      teamCard.className = "list-card";
+      teamCard.dataset.tid = `${team.id}`;
       const firstCard = document.createElement("div");
       firstCard.innerHTML = `
-            <img src="${car.image}" alt="">
+            <img src="${team.image}" alt="">
             `;
 
       const secondCard = document.createElement("div");
       secondCard.innerHTML = `
-            <p>Model: ${car.model}</p>
-            <p>Motor: ${car.motor}</p>
+            <p>Name: ${team.name}</p>
+            <p>Country: ${team.country}</p>
             `;
-      carCard.appendChild(firstCard);
-      carCard.appendChild(secondCard);
-      cardContainer.appendChild(carCard);
+      teamCard.appendChild(firstCard);
+      teamCard.appendChild(secondCard);
+      cardContainer.appendChild(teamCard);
+
+      teamCard.addEventListener('click', (e) => {
+        console.log(teamCard.dataset.tid);
+        this.innerHTML  // Accede al dataset del artículo
     });
 
-    document.querySelector('.list-card').addEventListener('click', (e) =>{
-        console.log(e.target.dataset.tid);
-    })
+    });
+    
   }
 }
-customElements.define('list-cars', ListCars)
+
+customElements.define('list-pilots',ListPilots)

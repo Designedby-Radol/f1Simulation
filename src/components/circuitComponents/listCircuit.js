@@ -16,7 +16,7 @@ class ListCircuits extends HTMLElement{
     const btnBack = document.querySelector("#btnBack");
     btnBack.dataset.ed = "9";
     btnBack.addEventListener("click", () => {
-      if (btnBack.dataset.ed == 8) {
+      if (btnBack.dataset.ed == 9) {
         btnBack.dataset.ed = "2";
         appMain.innerHTML = `<manage-circuit></manage-circuit>`;
       }
@@ -48,14 +48,14 @@ class ListCircuits extends HTMLElement{
     data.forEach((circuit) => {
       const circuitCard = document.createElement("article");
       circuitCard.className = "list-card";
-      circuitCard.dataset.tid = `${circuit.id}`;
+      circuitCard.dataset.cid = `${circuit.id}`;
       const firstCard = document.createElement("div");
       firstCard.innerHTML = `
-            <img src="${circuit.image}" alt="">
-            <p> ${circuit.name}</p>
-            <p>${circuit.country}</p>
-            <p>${circuit.length}</p>
-            <p>${circuit.laps}</p>
+            <img src="${circuit.img}" alt="">
+            <p>Name: ${circuit.name}</p>
+            <p>Country: ${circuit.country}</p>
+            <p>Length: ${circuit.length}</p>
+            <p>Laps: ${circuit.laps}</p>
             `;
 
       const secondCard = document.createElement("div");
@@ -66,9 +66,6 @@ class ListCircuits extends HTMLElement{
       circuitCard.appendChild(secondCard);
       cardContainer.appendChild(circuitCard);
     });
-    document.querySelector('.list-card').addEventListener('click', (e) =>{
-        console.log(e.target.dataset.tid);
-    })
   }
 }
 customElements.define("list-circuits", ListCircuits);
