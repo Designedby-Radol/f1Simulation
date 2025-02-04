@@ -1,15 +1,13 @@
-class ListCircuits extends HTMLElement {
-  constructor() {
-    super();
-  }
-
-  connectedCallback() {
-    this.innerHTML = /*html*/ `
+class ListCircuits extends HTMLElement{
+    constructor(){
+        super();
+    }
+    connectedCallback(){
+        this.innerHTML= /*html*/`
         <style>
         @import 'src/css/hoverCard.css'
         </style>
         <div id="cardListedContainer">
-
         </div>
         `;
 
