@@ -66,6 +66,13 @@ class ManageCircuit extends HTMLElement {
             `;
     });
 
+    document.querySelector('#listCircuit').addEventListener('click' , (e) => {
+      e.preventDefault();
+      btnBack.dataset.ed = "1";
+      appMain.innerHTML = `
+            <list-circuits></list-circuits>
+      `
+    })
     //dataset 9 reservado para lista de circuitos
   }
 }

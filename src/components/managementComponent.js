@@ -6,7 +6,7 @@ class ManagementComponent extends HTMLElement {
   connectedCallback() {
     document.body.innerHTML = `  
         <style> @import 'src/css/cardStyle.css'</style>
-        <video src="url('https://drive.google.com/file/d/1hDhhlipD5pnwKerfcMuAN6CaicaBczDO/view?usp=sharing')" autoplay muted loop id="background-video"></video>
+        <video src="src/services/0203(1).mp4" autoplay muted loop id="background-video"></video>
 
         <header class="header">
             <a id="btnBack"></a>

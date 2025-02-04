@@ -29,7 +29,7 @@ class CreateCircuit extends HTMLElement {
                 <textarea id="circuitDescription" name="description" rows="3" required></textarea>
 
                 <label for="circuitImage">Image URL</label>
-                <input type="url" id="circuitImage" name="image" required>
+                <input type="url" id="circuitImage" name="img" required>
 
                 <button type="submit">Submit</button>
             </form>

@@ -4,7 +4,6 @@ import './css/style.css'
 
 // Components
 
-import './components/simulationComponent/mainSimulation.js'
 import './components/managementComponent.js'
 import './components/mainComponent.js'
 
@@ -12,6 +11,7 @@ import './components/circuitComponents/managementCircuit.js'
 import './components/circuitComponents/createCircuitComponent.js';
 import './components/circuitComponents/editCircuit.js';
 import './components/circuitComponents/deleteCircuit.js'
+import './components/circuitComponents/listCircuit.js'
 
 import './components/teamComponents/managementTeam.js'
 import './components/teamComponents/createTeamComponent.js';
@@ -29,7 +29,7 @@ import './components/carComponent/editCar.js'
 import './components/carComponent/deleteCar.js'
 
 document.querySelector('body').innerHTML = `
-  <video src="url('https://drive.google.com/file/d/1hDhhlipD5pnwKerfcMuAN6CaicaBczDO/view?usp=sharing')" autoplay muted loop id="background-video"></video>
+  <video src="src/services/0203(1).mp4" autoplay muted loop id="background-video"></video>
 
   <div class="FirstPage">
     <a href="https://www.formula1.com/" target="_blank">

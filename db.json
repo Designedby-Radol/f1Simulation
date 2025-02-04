@@ -1,28 +1,154 @@
 {
   "teams": [
+    {
+      "name": "Red Bull Racing",
+      "country": "Austria",
+      "pilots": [
+        {
+          "id": 1,
+          "name": "Max Verstappen",
+          "role": "Líder"
+        },
+        {
+          "id": 1,
+          "name": "Max Verstappen",
+          "role": "Líder"
+        },
+        {
+          "id": 1,
+          "name": "Max Verstappen",
+          "role": "Líder"
+        },
+        {
+          "id": "1",
+          "name": "sa",
+          "role": "asd",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjUTHXilvg23twEQyqCTdfgs9uOqsbmp0pMw&s"
+        }
+      ],
+      "img": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Red_Bull_Racing_Logo.svg",
+      "id": "53c5"
+    },
+    {
+      "id": "a213",
+      "name": "Sebastian Visbal",
+      "country": "colombia",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjUTHXilvg23twEQyqCTdfgs9uOqsbmp0pMw&s",
+      "pilots": [
+        {
+          "id": "1",
+          "name": "CarlosNMario",
+          "role": "Leader",
+          "image": "https://static.wikia.nocookie.net/minibeatpowerockersfandomcom/images/f/fe/Carlos.png/revision/latest/thumbnail/width/360/height/360?cb=20190617000331&path-prefix=es"
+        },
+        {
+          "name": "Jose arturo",
+          "role": "leader",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjUTHXilvg23twEQyqCTdfgs9uOqsbmp0pMw&s"
+        },
+        {
+          "id": "194cc964e8a",
+          "name": "Carlo",
+          "role": "Leader",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjUTHXilvg23twEQyqCTdfgs9uOqsbmp0pMw&s"
+        }
+      ]
+    },
+    {
+      "id": "194cc99b556",
+      "name": "losJholve",
+      "country": "colombia",
+      "image": "https://static.wikia.nocookie.net/minibeatpowerockersfandomcom/images/f/fe/Carlos.png/revision/latest/thumbnail/width/360/height/360?cb=20190617000331&path-prefix=es"
+    }
   ],
   "circuits": [
     {
-      "id": "194d119e1c2",
-      "name": "rozo",
-      "country": "italy",
-      "length": "3.000",
-      "laps": "6",
-      "description": "pista de alto alcance con muchas vueltas y diferentes climas",
+      "name": "Silverstone",
+      "country": "Reino Unio",
+      "length": "6",
+      "laps": "53",
+      "description": "",
+      "lap_record": {
+        "time": "1:27.097",
+        "pilot": "Max Verstappen",
+        "year": 2020
+      },
+      "winners": [
+        {
+          "season": 2021,
+          "pilot": 3
+        },
+        {
+          "season": 2022,
+          "pilot": 5
+        },
+        {
+          "season": 2023,
+          "pilot": 1
+        }
+      ],
+      "img": "",
+      "id": "9178"
+    },
+    {
+      "id": "1",
+      "name": "Josesito",
+      "country": "columbia",
+      "length": "19",
+      "laps": "3",
+      "description": "asdasdasdasd",
       "lap_record": {},
       "winners": []
     },
     {
-      "id": "194d11b0738",
-      "name": "riovaz",
-      "country": "grece",
-      "length": "1.000",
+      "id": "e1d2",
+      "name": "barrancabermeja",
+      "country": "colombia",
+      "length": "6",
       "laps": "4",
-      "description": "Pista corta pero peligrosa, ideal para maniobras agresivas ",
+      "description": "ASDLKHJKLASCFDHSADFVa",
+      "lap_record": {},
+      "winners": []
+    },
+    {
+      "id": "194cc8a0aee",
+      "name": "losJholver",
+      "country": "colombia",
+      "length": "5",
+      "laps": "2",
+      "description": "asdasdasd",
       "lap_record": {},
       "winners": []
     }
   ],
   "cars": [
+    {
+      "model": "RB22",
+      "motor": "Honda",
+      "max_speed_kmh": 360,
+      "accelerationZtoT": 2.5,
+      "pilots": [
+        1,
+        2
+      ],
+      "performance": {
+        "acceleration_ZtoH": "undefined",
+        "max_speed_kmh": "undefined",
+        "average_Speed": "undefined",
+        "fuel_consumption": {
+          "dry": "",
+          "rainy": "",
+          "extreme": ""
+        },
+        "tire_wear": {
+          "dry": "",
+          "rainy": "",
+          "extreme": ""
+        }
+      },
+      "img": "https://upload.wikimedia.org/wikipedia/commons/8/89/Max_Verstappen_2023_Austria_FP2_%28cropped%29.jpg",
+      "id": "e161",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/8/89/Max_Verstappen_2023_Austria_FP2_%28cropped%29.jpg"
+    }
   ]
 }
