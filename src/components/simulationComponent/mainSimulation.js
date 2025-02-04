@@ -62,7 +62,6 @@ class SingleDriverRace {
         
         const randomFactor = 0.995 + Math.random() * 0.01;
 
-
         return baseTime * weatherEffect * (1 + tireWear + fuelEffect) * randomFactor;
     }
 
@@ -192,7 +191,7 @@ class SimulateCard extends HTMLElement {
                 border: 1px solid #333;
                 overflow-y: auto;
                 scrollbar-width: thin;
-                scrollbar-color: #2196F3 #1E1E1E;
+                scrollbar-color:rgb(206, 20, 20) #1E1E1E;
             }
 
             /* Estilos para la scrollbar en Chrome/Safari */
@@ -206,12 +205,12 @@ class SimulateCard extends HTMLElement {
             }
 
             .results-card::-webkit-scrollbar-thumb {
-                background: #2196F3;
+                background:rgb(194, 9, 9);
                 border-radius: 4px;
             }
 
             .results-card::-webkit-scrollbar-thumb:hover {
-                background: #1976D2;
+                background:rgb(240, 6, 6);
             }
 
             .simulation-header {
@@ -226,7 +225,7 @@ class SimulateCard extends HTMLElement {
             .circuit-name, .driver-name {
                 font-size: 1.5rem;
                 font-weight: bold;
-                color: #2196F3;
+                color:rgb(209, 20, 20);
             }
 
             .weather-icon {
@@ -250,7 +249,7 @@ class SimulateCard extends HTMLElement {
                 margin-top: 20px;
                 padding: 15px 30px;
                 font-size: 1.2rem;
-                background-color: #2196F3;
+                background-color:rgb(29, 253, 9);
                 color: white;
                 border: none;
                 border-radius: 8px;
@@ -260,7 +259,7 @@ class SimulateCard extends HTMLElement {
             }
 
             .simulate-button:hover {
-                background-color: #1976D2;
+                background-color:rgb(0, 167, 28);
             }
 
             .simulate-button:disabled {
@@ -284,13 +283,13 @@ class SimulateCard extends HTMLElement {
             }
 
             .completed-lap {
-                background-color: #1B5E20;
+                background-color:rgb(25, 184, 36);
                 color: #FFFFFF;
             }
 
             .simulation-title {
                 font-size: 2rem;
-                color: #2196F3;
+                color:rgb(150, 6, 6);
                 text-align: center;
                 margin-bottom: 20px;
                 font-weight: bold;
@@ -310,7 +309,7 @@ class SimulateCard extends HTMLElement {
             }
 
             .info-section h3 {
-                color: #2196F3;
+                color:rgb(146, 1, 1);
                 margin-bottom: 15px;
                 font-size: 1.2rem;
             }
@@ -352,13 +351,21 @@ class SimulateCard extends HTMLElement {
         this.currentLap = 0;
         this.elapsedTime = 0;
         
-        const monza = new Circuit("Monza", 32, 0.344, "dry");
+        // Ajustamos solo la longitud del circuito a un valor realista
+        const monza = new Circuit("Monza", 32, 1.302, "dry");
         const car = new Car(2.6, 340, 320);
         const driver = new Driver("Max Verstappen", 2, car);
         const race = new SingleDriverRace(monza, driver);
         
         race.simulate();
         const results = race.getResults();
+        
+        // Almacenamos los tiempos acumulados para cada vuelta
+        const accumulatedTimes = results.lapTimes.map((lap, index) => {
+            const time = this.parseTime(lap.time);
+            if (index === 0) return time;
+            return time + this.parseTime(results.lapTimes[index - 1].time);
+        });
         
         this.updateResults({
             ...results,
@@ -368,15 +375,14 @@ class SimulateCard extends HTMLElement {
             currentTime: '0:00.000'
         });
         
-        const updateInterval = 100;
+        const updateInterval = 100; // 100ms para actualizaciones más suaves
         this.intervalId = setInterval(() => {
             this.elapsedTime += updateInterval / 1000;
             
-            if (this.currentLap < results.lapTimes.length) {
-                const currentLapTime = this.parseTime(results.lapTimes[this.currentLap].time);
-                if (this.elapsedTime >= currentLapTime) {
-                    this.currentLap++;
-                }
+            // Actualizamos la vuelta actual basándonos en los tiempos acumulados
+            while (this.currentLap < accumulatedTimes.length && 
+                    this.elapsedTime >= accumulatedTimes[this.currentLap]) {
+                this.currentLap++;
             }
             
             this.updateResults({
@@ -387,17 +393,25 @@ class SimulateCard extends HTMLElement {
                 currentTime: this.formatTime(this.elapsedTime)
             });
             
+            // Detenemos la simulación cuando alcanzamos el tiempo total
             if (this.elapsedTime >= this.parseTime(results.totalTime)) {
                 clearInterval(this.intervalId);
                 this.isSimulating = false;
+                this.currentLap = results.lapTimes.length; // Aseguramos que todas las vueltas estén marcadas
+                this.updateResults({
+                    ...results,
+                    circuit: monza,
+                    car: car,
+                    driver: driver,
+                    currentTime: results.totalTime
+                });
             }
         }, updateInterval);
     }
 
     parseTime(timeString) {
         const [mins, secs] = timeString.split(':');
-        // Convertimos correctamente minutos a segundos y sumamos los segundos
-        return (parseInt(mins) * 60) + parseFloat(secs);
+        return parseFloat(mins) * 60 + parseFloat(secs);
     }
 
     formatTime(seconds) {
@@ -412,12 +426,12 @@ class SimulateCard extends HTMLElement {
         if (!resultsCard) return;
 
         const weatherIcons = {
-            dry: '☀️ Seco',
-            rainy: '🌧️ Lluvia',
-            extreme: '⛈️ Tormenta'
+            dry: 'Seco',
+            rainy: 'Lluvia',
+            extreme: 'Tormenta'
         };
 
-        const lapRows = Array(results.circuit?.laps || 3)
+        const lapRows = Array(results.circuit?.laps)
             .fill(0)
             .map((_, index) => `
                 <div class="info-row ${this.currentLap > index ? 'completed-lap' : ''}">
@@ -435,19 +449,19 @@ class SimulateCard extends HTMLElement {
                     <h3>🏁 Circuito</h3>
                     <div class="info-row">
                         <span>Nombre:</span>
-                        <span>${results.circuit?.name || 'Monza'}</span>
+                        <span>${results.circuit?.name}</span>
                     </div>
                     <div class="info-row">
                         <span>Longitud:</span>
-                        <span>${results.circuit?.length || '5.793'} km</span>
+                        <span>${results.circuit?.length} km</span>
                     </div>
                     <div class="info-row">
                         <span>Vueltas:</span>
-                        <span>${results.circuit?.laps || '3'}</span>
+                        <span>${results.circuit?.laps}</span>
                     </div>
                     <div class="info-row">
                         <span>Clima:</span>
-                        <span>${weatherIcons[results.circuit?.weather] || weatherIcons.dry}</span>
+                        <span>${weatherIcons[results.circuit?.weather]}</span>
                     </div>
                 </div>
 
@@ -455,19 +469,19 @@ class SimulateCard extends HTMLElement {
                     <h3>🏎️ Vehículo</h3>
                     <div class="info-row">
                         <span>Piloto:</span>
-                        <span>${results.driver?.name || 'Max Verstappen'}</span>
+                        <span>${results.driver?.name}</span>
                     </div>
                     <div class="info-row">
                         <span>Número:</span>
-                        <span>#${results.driver?.number || '1'}</span>
+                        <span>#${results.driver?.number}</span>
                     </div>
                     <div class="info-row">
                         <span>Velocidad Máx:</span>
-                        <span>${results.driver?.car?.maxSpeed || '340'} km/h</span>
+                        <span>${results.driver?.car?.maxSpeed} km/h</span>
                     </div>
                     <div class="info-row">
                         <span>Aceleración:</span>
-                        <span>${results.driver?.car?.acceleration || '2.6'}s</span>
+                        <span>${results.driver?.car?.acceleration }s</span>
                     </div>
                 </div>
             </div>
@@ -502,7 +516,7 @@ class SimulateCard extends HTMLElement {
                     <h2 class="simulation-title">Simulación</h2>
                     <div class="info-sections">
                         <div class="info-section">
-                            <h3>🏁 Circuito</h3>
+                            <h3>Circuito</h3>
                             <div class="info-row">
                                 <span>Nombre:</span>
                                 <span>Monza</span>
@@ -517,7 +531,7 @@ class SimulateCard extends HTMLElement {
                             </div>
                             <div class="info-row">
                                 <span>Clima:</span>
-                                <span>☀️ Seco</span>
+                                <span>Seco</span>
                             </div>
                         </div>
 

@@ -45,7 +45,7 @@ class ListCircuits extends HTMLElement{
             `
             circuitCard.appendChild(firstCard)
             circuitCard.appendChild(secondCard)
-            cardContainer.appendChild(circuitCard)s
+            cardContainer.appendChild(circuitCard)
         }
         )
     }
