@@ -7,6 +7,7 @@ class MainComponent extends HTMLElement{
         const body = document.querySelector('body');
         body.innerHTML='';
         body.innerHTML = `
+            <video src="url('https://drive.google.com/file/d/1hDhhlipD5pnwKerfcMuAN6CaicaBczDO/view?usp=sharing')" autoplay muted loop id="background-video"></video>
         <style>
         @import 'src/css/cardStyle.css'
         </style>
@@ -26,13 +27,6 @@ class MainComponent extends HTMLElement{
             e.preventDefault();
             const appMain = document.querySelector('#main');
             appMain.innerHTML = '<management-component></management-component>'
-            delete btnBack.dataset.id
-        })
-        
-        const playButton = document.querySelector('#play').addEventListener('click', (e) => {
-            e.preventDefault();
-            const appMain = document.querySelector('#main');
-            appMain.innerHTML = '<simulate-card></simulate-card>'
             delete btnBack.dataset.id
         })
     }

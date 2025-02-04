@@ -1,14 +1,19 @@
+/* Formulario para crear tarjeta de vehiculo */
 
+.header{
+    width: 20%;
+    flex-direction: row;
+}
 
-/* Contenedor del formulario */
-body {
-  height: 100vh;
+#main{
+    width: 80%;
 }
 
 .formCreate {
   position: relative;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   background: linear-gradient(
     145deg,
     rgba(0, 0, 0, 0.9),
@@ -17,11 +22,36 @@ body {
   border-radius: 15px;
   padding: 10px;
   box-shadow: 0 0 20px #2cff05, 0 0 40px #2cff05;
-  width: 600px;
+  width: 800px;
   max-width: 700px;
   height: auto;
   text-align: center;
   margin: 20px;
+}
+
+.containerInfo{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.containerInfo .container{
+  width: 33%;
+}
+
+.formCreate input,
+.formCreate textarea {
+  width: 30%;
+  max-width: 30%;
+  max-height: 90px;
+  padding: 8px;
+  background-color: #1a1a1a;
+  border: 2px solid #2cff05;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 /* Título del formulario */
@@ -40,21 +70,6 @@ body {
   text-transform: uppercase;
 }
 
-/* Inputs y Textarea */
-.formCreate input,
-.formCreate textarea {
-  width: 80%;
-  max-width: 80%;
-  max-height: 200px;
-  padding: 8px;
-  background-color: #1a1a1a;
-  border: 2px solid #2cff05;
-  border-radius: 8px;
-  color: white;
-  font-size: 14px;
-  outline: none;
-  transition: box-shadow 0.3s ease-in-out;
-}
 
 /* Efecto de enfoque en los inputs */
 .formCreate input:focus,
@@ -131,42 +146,5 @@ body {
     padding: 15px cover;
     background: #2cff05;
     font-size: 16px;
-  }
-}
-
-/* Pantallas grandes (escritorios) */
-@media (min-width: 1200px) {
-  .formCreate {
-    padding: 30px;
-    width: 600px;
-    max-width: 700px;
-  }
-
-  .formCreate h1 {
-    font-size: 24px;
-  }
-
-  .formCreate input,
-  .formCreate textarea {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .formCreate button {
-    font-size: 18px;
-    padding: 12px;
-  }
-}
-
-@media (max-width: 1024px) {
-  #btnBack {
-    padding: 15px;
-    font-size: 18px;
-    width: 60px;
-    height: 60px;
-  }
-
-  #btnBack::before {
-    font-size: 26px;
   }
 }

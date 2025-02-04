@@ -6,10 +6,11 @@ class ManagementComponent extends HTMLElement {
   connectedCallback() {
     document.body.innerHTML = `  
         <style> @import 'src/css/cardStyle.css'</style>
+        <video src="url('https://drive.google.com/file/d/1hDhhlipD5pnwKerfcMuAN6CaicaBczDO/view?usp=sharing')" autoplay muted loop id="background-video"></video>
+
         <header class="header">
             <a id="btnBack"></a>
         </header>
-  
         <main id="main">
         <div class= "card">
             <a id="manageCircuit">
@@ -73,7 +74,13 @@ class ManagementComponent extends HTMLElement {
             `;
     });
 
-    //espacio reservado para pilotos, dataset.ed == 5
+    document.querySelector("#manageCars").addEventListener("click" , (e) => {
+      e.preventDefault();
+      btnBack.dataset.ed = "0";
+      appMain.innerHTML = `
+        <manage-cars></manage-cars>
+      `
+    })
   }
 }
 

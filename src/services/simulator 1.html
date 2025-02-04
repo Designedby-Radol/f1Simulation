@@ -1,4 +1,13 @@
-html{
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:5173/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="module" src="./simulator 1_files/client"></script>
+
+    
+    <link rel="icon" type="image/svg+xml" href="http://localhost:5173/public/cdnlogo.com_f1-new.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simulator 1</title>
+  <style type="text/css" data-vite-dev-id="C:/Users/tatan/OneDrive/Escritorio/Campusland/JavaScript/Proyecto/f1Simulator/f1Simulation/src/css/style.css">html{
   height: 100%;
 }
 
@@ -30,6 +39,8 @@ body {
   box-shadow: none;
 }
 
+
+
 @media (max-width: 600px) {
   body {
       flex-wrap: wrap;
@@ -46,7 +57,7 @@ body {
 .header {
   display: flex;
   justify-content: center;
-  width: 20%;
+  width: 100%;
   height: 80px;
 }
 
@@ -165,3 +176,49 @@ input , textarea , label , button{
   box-shadow: 0 0 20px red, 0 0 40px red;
   transform: scale(1.1);
 }
+</style></head>
+  <body cz-shortcut-listen="true">  
+        <style> @import 'src/css/cardStyle.css'</style>
+        <video src="src/services/0203.mp4" autoplay="" muted="" loop="" id="background-video"></video>
+
+        <header class="header">
+            <a id="btnBack" data-ed="14"></a>
+        </header>
+        <main id="main">
+        <edit-pilot>
+        <style>@import 'src/css/editStyle.css'</style>
+        <div class="formEdit">
+            <form id="myformEditPilot">
+                <h1>Write team to edit a pilot</h1>
+
+                <label for="teamSearch">Search</label>
+                <input type="text" id="teamSearch" required="">
+                
+                <label for="teamName">Name</label>
+                <input type="text" id="teamName" name="name" disabled="">
+
+                <label for="teamId">ID</label>
+                <input type="text" id="teamId" disabled="">
+
+                <label for="pilotSearch">Search</label>
+                <input type="text" id="pilotSearch" required="">
+
+                <label for="pilotId">Pilot ID</label>
+                <input type="text" id="pilotId" name="id" required="">
+
+                <label for="pilotName">Name</label>
+                <input type="text" id="pilotName" name="name">
+
+                <label for="pilotRole">Role</label>
+                <input type="text" id="pilotRole" name="role">
+
+                <label for="pilotImage">Image URL</label>
+                <input type="url" id="pilotImage" name="image">
+
+                <button type="submit">Edit</button>
+            </form>
+        </div>
+        </edit-pilot>
+        </main>
+        
+        </body></html>
