@@ -16,7 +16,8 @@ import './components/circuitComponents/listCircuit.js'
 import './components/teamComponents/managementTeam.js'
 import './components/teamComponents/createTeamComponent.js';
 import './components/teamComponents/editTeam.js';
-import './components/teamComponents/deleteTeam.js'
+import './components/teamComponents/deleteTeam.js';
+import './components/teamComponents/listTeam.js';
 
 import './components/pilotsComponents/managementPilots.js'
 import './components/pilotsComponents/createPilotComponent.js';
