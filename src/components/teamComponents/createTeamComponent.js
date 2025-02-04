@@ -48,6 +48,8 @@ class CreateTeam extends HTMLElement {
             "country" : data.country,
             "image" : data.image
           } 
+          formattedData.pilots = []
+
 
           const finalData = JSON.stringify(formattedData)
           try {

@@ -1,154 +1,91 @@
 {
   "teams": [
     {
-      "name": "Red Bull Racing",
-      "country": "Austria",
-      "pilots": [
-        {
-          "id": 1,
-          "name": "Max Verstappen",
-          "role": "Líder"
-        },
-        {
-          "id": 1,
-          "name": "Max Verstappen",
-          "role": "Líder"
-        },
-        {
-          "id": 1,
-          "name": "Max Verstappen",
-          "role": "Líder"
-        },
-        {
-          "id": "1",
-          "name": "sa",
-          "role": "asd",
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjUTHXilvg23twEQyqCTdfgs9uOqsbmp0pMw&s"
-        }
-      ],
-      "img": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Red_Bull_Racing_Logo.svg",
-      "id": "53c5"
-    },
-    {
-      "id": "a213",
-      "name": "Sebastian Visbal",
+      "id": "194d12719e5",
+      "name": "los pirulines",
       "country": "colombia",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjUTHXilvg23twEQyqCTdfgs9uOqsbmp0pMw&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHMZQgQcD_jF6tU6Ktvi-HnyltIZB-Jz6lrQ&s",
       "pilots": [
         {
-          "id": "1",
-          "name": "CarlosNMario",
-          "role": "Leader",
-          "image": "https://static.wikia.nocookie.net/minibeatpowerockersfandomcom/images/f/fe/Carlos.png/revision/latest/thumbnail/width/360/height/360?cb=20190617000331&path-prefix=es"
+          "id": "194d131b7d2",
+          "name": "atl bucaros",
+          "role": "piloto",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQplGGrtOPhZhYKgrfKheLiwdoCWvvcMdM1Qg&s"
         },
         {
-          "name": "Jose arturo",
-          "role": "leader",
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjUTHXilvg23twEQyqCTdfgs9uOqsbmp0pMw&s"
+          "id": "194d1322621",
+          "name": "santiago",
+          "role": "piloto",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQplGGrtOPhZhYKgrfKheLiwdoCWvvcMdM1Qg&s"
         },
         {
-          "id": "194cc964e8a",
-          "name": "Carlo",
-          "role": "Leader",
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjUTHXilvg23twEQyqCTdfgs9uOqsbmp0pMw&s"
+          "id": "194d134edc3",
+          "name": "santiago",
+          "role": "piloto",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQplGGrtOPhZhYKgrfKheLiwdoCWvvcMdM1Qg&s"
         }
       ]
     },
     {
-      "id": "194cc99b556",
-      "name": "losJholve",
-      "country": "colombia",
-      "image": "https://static.wikia.nocookie.net/minibeatpowerockersfandomcom/images/f/fe/Carlos.png/revision/latest/thumbnail/width/360/height/360?cb=20190617000331&path-prefix=es"
+      "id": "194d127c278",
+      "name": "atl bucaros",
+      "country": "tolima",
+      "image": "data:image/jpeg;base64,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",
+      "pilots": [
+        {
+          "id": "194d1313fbc",
+          "name": "Radol",
+          "role": "piloto",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQplGGrtOPhZhYKgrfKheLiwdoCWvvcMdM1Qg&s"
+        }
+      ]
     }
   ],
   "circuits": [
     {
-      "name": "Silverstone",
-      "country": "Reino Unio",
-      "length": "6",
-      "laps": "53",
-      "description": "",
-      "lap_record": {
-        "time": "1:27.097",
-        "pilot": "Max Verstappen",
-        "year": 2020
-      },
-      "winners": [
-        {
-          "season": 2021,
-          "pilot": 3
-        },
-        {
-          "season": 2022,
-          "pilot": 5
-        },
-        {
-          "season": 2023,
-          "pilot": 1
-        }
-      ],
-      "img": "",
-      "id": "9178"
-    },
-    {
-      "id": "1",
-      "name": "Josesito",
-      "country": "columbia",
-      "length": "19",
+      "id": "194d1218bbe",
+      "name": "rozo",
+      "country": "grece",
+      "length": "300",
       "laps": "3",
-      "description": "asdasdasdasd",
+      "description": "corto pero preciso",
+      "img": "https://e00-marca.uecdn.es/deporte/motor/formula1/img/circuitos/bahrein.jpg",
       "lap_record": {},
       "winners": []
     },
     {
-      "id": "e1d2",
-      "name": "barrancabermeja",
-      "country": "colombia",
-      "length": "6",
-      "laps": "4",
-      "description": "ASDLKHJKLASCFDHSADFVa",
-      "lap_record": {},
-      "winners": []
-    },
-    {
-      "id": "194cc8a0aee",
-      "name": "losJholver",
-      "country": "colombia",
-      "length": "5",
-      "laps": "2",
-      "description": "asdasdasd",
+      "id": "194d12247bf",
+      "name": "riovaz",
+      "country": "italy",
+      "length": "2000",
+      "laps": "3",
+      "description": "largo pero aburrido",
+      "img": "https://cdn2.mediotiempo.com/uploads/media/2023/07/22/marina-bay.jpg",
       "lap_record": {},
       "winners": []
     }
   ],
   "cars": [
     {
-      "model": "RB22",
-      "motor": "Honda",
-      "max_speed_kmh": 360,
-      "accelerationZtoT": 2.5,
-      "pilots": [
-        1,
-        2
-      ],
+      "id": "194d1257147",
+      "model": "pichirilo",
+      "motor": "mazda 3 ",
       "performance": {
-        "acceleration_ZtoH": "undefined",
-        "max_speed_kmh": "undefined",
-        "average_Speed": "undefined",
+        "acceleration_ZtoH": "2.4",
+        "max_speed_kmh": "250",
+        "average_Speed": "340",
         "fuel_consumption": {
-          "dry": "",
-          "rainy": "",
-          "extreme": ""
+          "dry": "0.5",
+          "rainy": "1.2",
+          "extreme": "2.3"
         },
         "tire_wear": {
-          "dry": "",
-          "rainy": "",
-          "extreme": ""
+          "dry": "0.8",
+          "rainy": "1.5",
+          "extreme": "1.8"
         }
       },
-      "img": "https://upload.wikimedia.org/wikipedia/commons/8/89/Max_Verstappen_2023_Austria_FP2_%28cropped%29.jpg",
-      "id": "e161",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/8/89/Max_Verstappen_2023_Austria_FP2_%28cropped%29.jpg"
+      "image": "https://www.topgear.com/sites/default/files/images/news-article/2021/03/08c2a7ed1c8471d88904587f7554c6b9/sf21-trequarti.jpg"
     }
   ]
 }
