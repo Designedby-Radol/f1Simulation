@@ -43,21 +43,27 @@ class SingleDriverRace {
         this.driver = driver;
     }
 
-    calculateLapTime() {
-        const baseTime = (this.circuit.length / this.driver.car.normalSpeed) * 3600;
-        const currentLap = this.driver.lapTimes.length + 1;
+    calculateLapTime(currentLap) {
+        const speedInMS = this.driver.car.normalSpeed / 3.6; // km/h a m/s
+        const lengthInMeters = this.circuit.length * 1000;
+        const baseTime = lengthInMeters / speedInMS;
         
         const weatherEffect = {
             dry: 1,
-            rainy: 1.2,
-            extreme: 1.4
-        }[this.circuit.weather];
-        
-        const tireWear = this.driver.car.tireWear[this.circuit.weather] * (currentLap / this.circuit.laps);
-        const fuelEffect = this.driver.car.fuelConsumption[this.circuit.weather] * (currentLap / this.circuit.laps);
-        const randomFactor = 0.95 + Math.random() * 0.1;
+            rainy: 1.15,  
+            extreme: 1.3  
+        }[this.circuit.weather];        
 
-        return baseTime * weatherEffect * (1 + tireWear) * (1 + fuelEffect) * randomFactor;
+        const tireWear = this.driver.car.tireWear[this.circuit.weather] * 
+                        Math.pow(currentLap / this.circuit.laps, 1.5) * 0.05;
+        
+        const fuelEffect = this.driver.car.fuelConsumption[this.circuit.weather] * 
+                          (1 - (currentLap / this.circuit.laps)) * 0.03;
+        
+        const randomFactor = 0.995 + Math.random() * 0.01;
+
+
+        return baseTime * weatherEffect * (1 + tireWear + fuelEffect) * randomFactor;
     }
 
     simulate() {
@@ -65,7 +71,7 @@ class SingleDriverRace {
         this.driver.totalTime = 0;
 
         for (let lap = 1; lap <= this.circuit.laps; lap++) {
-            const lapTime = this.calculateLapTime();
+            const lapTime = this.calculateLapTime(lap);
             this.driver.lapTimes.push(lapTime);
             this.driver.totalTime += lapTime;
         }
@@ -75,7 +81,8 @@ class SingleDriverRace {
         const formatTime = (seconds) => {
             const mins = Math.floor(seconds / 60);
             const secs = (seconds % 60).toFixed(3);
-            return `${mins}:${secs.padStart(6, '0')}`;
+            // Aseguramos que los segundos siempre tengan 3 decimales y 2 dígitos
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
         };
 
         return {
@@ -345,7 +352,7 @@ class SimulateCard extends HTMLElement {
         this.currentLap = 0;
         this.elapsedTime = 0;
         
-        const monza = new Circuit("Monza", 32, 0.230, "dry");
+        const monza = new Circuit("Monza", 32, 0.344, "dry");
         const car = new Car(2.6, 340, 320);
         const driver = new Driver("Max Verstappen", 2, car);
         const race = new SingleDriverRace(monza, driver);
@@ -389,13 +396,15 @@ class SimulateCard extends HTMLElement {
 
     parseTime(timeString) {
         const [mins, secs] = timeString.split(':');
-        return parseInt(mins) * 60 + parseFloat(secs);
+        // Convertimos correctamente minutos a segundos y sumamos los segundos
+        return (parseInt(mins) * 60) + parseFloat(secs);
     }
 
     formatTime(seconds) {
         const mins = Math.floor(seconds / 60);
         const secs = (seconds % 60).toFixed(3);
-        return `${mins}:${secs.padStart(6, '0')}`;
+        // Aseguramos que los segundos siempre tengan 3 decimales y 2 dígitos
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     }
 
     updateResults(results) {
