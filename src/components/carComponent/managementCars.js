@@ -35,7 +35,7 @@ class ManagementCars extends HTMLElement{
     btnBack.dataset.ed = "5";
     btnBack.addEventListener("click", () => {
       if (btnBack.dataset.ed == 5) {
-        btnBack.dataset.ed = "5";
+        btnBack.dataset.ed = "1";
         document.body.innerHTML = `
                 <management-component></management-component>`;
       }
@@ -59,11 +59,27 @@ class ManagementCars extends HTMLElement{
 
     document.querySelector("#deleteCar").addEventListener("click", (e) => {
       e.preventDefault();
-      btnBack.dataset.ed = "1";
+      btnBack.dataset.ed = "5";
       appMain.innerHTML = `
             <delete-car></delete-car>
             `;
     });
+
+    document.querySelector("#deleteCar").addEventListener("click", (e) => {
+        e.preventDefault();
+        btnBack.dataset.ed = "1";
+        appMain.innerHTML = `
+              <delete-car></delete-car>
+              `;
+      });
+
+      document.querySelector("#listCars").addEventListener("click", (e) => {
+        e.preventDefault();
+        btnBack.dataset.ed = "1";
+        appMain.innerHTML = `
+              <list-cars></list-cars>
+              `;
+      });
 }
 }
 customElements.define('manage-cars', ManagementCars)

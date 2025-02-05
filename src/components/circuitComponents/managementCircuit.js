@@ -73,7 +73,6 @@ class ManageCircuit extends HTMLElement {
             <list-circuits></list-circuits>
       `
     })
-    //dataset 9 reservado para lista de circuitos
   }
 }
 

@@ -28,24 +28,11 @@ class MainComponent extends HTMLElement {
             const appMain = document.querySelector('#main');
 
             appMain.innerHTML = '<management-component></management-component>'
-            delete btnBack.dataset.id
         })
         const playButton = document.querySelector('#play').addEventListener('click', (e) => {
             e.preventDefault();
             const appMain = document.querySelector('#main');
-            appMain.innerHTML = ""
-            const simulacion = document.createElement('simulate-card');
-            simulacion.setAttribute('circuit-name', circuitName);
-            simulacion.setAttribute('laps', laps );
-            simulacion.setAttribute('length', length);
-            simulacion.setAttribute('weather', weather);
-            simulacion.setAttribute('acceleration', acceleration);
-            simulacion.setAttribute('max-speed', maxSpeed);
-            simulacion.setAttribute('normal-speed', normalSpeed);
-            simulacion.setAttribute('pilot-name', pilotName);
-            simulacion.setAttribute('pilot-number', pilotNumber);
-            appMain.appendChild(simulacion);
-
+            appMain.innerHTML = '<play-game></play-game>'
         })
     }
 }

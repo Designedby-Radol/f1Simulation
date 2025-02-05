@@ -69,6 +69,14 @@ class ManagePilots extends HTMLElement {
             <delete-team></delete-team>
             `;
     });
+
+    document.querySelector("#listTeam").addEventListener("click", (e) => {
+      e.preventDefault();
+      btnBack.dataset.ed = "1";
+      appMain.innerHTML = `
+            <list-team></list-team>
+            `;
+    });
   }
 }
 

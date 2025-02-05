@@ -1,5 +1,18 @@
 /* Formulario para crear tarjeta de vehiculo */
 
+
+.list-card:hover {
+  transform: perspective(250px) rotateX(10deg) translateY(-5%) translateZ(0);
+}
+.list-card:hover p {
+  opacity: 0.5; /* Ajusta el nivel de transparencia según lo necesites */
+  transition: opacity 0.3s ease;
+}
+.list-card:hover p:nth-of-type(4) {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
 .header{
     width: 20%;
     flex-direction: row;

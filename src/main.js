@@ -4,9 +4,10 @@ import './css/style.css'
 
 // Components
 
-import './components/simulationComponent/mainSimulation.js'
-import './components/managementComponent.js'
-import './components/mainComponent.js'
+import './components/simulationComponent/mainSimulation.js';
+import './components/managementComponent.js';
+import './components/mainComponent.js';
+import './components/playGame.js'
 
 import './components/circuitComponents/managementCircuit.js'
 import './components/circuitComponents/createCircuitComponent.js';
@@ -17,17 +18,20 @@ import './components/circuitComponents/listCircuit.js'
 import './components/teamComponents/managementTeam.js'
 import './components/teamComponents/createTeamComponent.js';
 import './components/teamComponents/editTeam.js';
-import './components/teamComponents/deleteTeam.js'
+import './components/teamComponents/deleteTeam.js';
+import './components/teamComponents/listTeam.js';
 
 import './components/pilotsComponents/managementPilots.js'
 import './components/pilotsComponents/createPilotComponent.js';
 import './components/pilotsComponents/editPilot.js';
-import './components/pilotsComponents/deletePilot.js'
+import './components/pilotsComponents/deletePilot.js';
+import './components/pilotsComponents/listPilots.js';
 
 import './components/carComponent/managementCars.js'
-import './components/carComponent/addCar.js'
-import './components/carComponent/editCar.js'
-import './components/carComponent/deleteCar.js'
+import './components/carComponent/addCar.js';
+import './components/carComponent/editCar.js';
+import './components/carComponent/deleteCar.js';
+import './components/carComponent/listCars.js';
 
 document.querySelector('body').innerHTML = `
   <video src="src/services/0203(1).mp4" autoplay muted loop id="background-video"></video>

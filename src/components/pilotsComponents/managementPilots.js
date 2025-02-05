@@ -67,6 +67,14 @@ class ManagePilots extends HTMLElement {
             <delete-pilot></delete-pilot>
             `;
     });
+
+    document.querySelector("#listPilots").addEventListener("click", (e) => {
+      e.preventDefault();
+      btnBack.dataset.ed = "1";
+      appMain.innerHTML = `
+            <list-pilots></list-pilots>
+            `;
+    });
   }
 }
 
