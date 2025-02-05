@@ -1,10 +1,10 @@
-class PlayGame extends HTMLElement{
-    constructor(){
-        super();
-    }
+class PlayGame extends HTMLElement {
+  constructor() {
+    super();
+  }
 
-    connectedCallback(){
-        document.body.innerHTML = `
+  connectedCallback() {
+    document.body.innerHTML = `
         <style>
         @import 'src/css/hoverCard.css'
         </style>
@@ -16,7 +16,7 @@ class PlayGame extends HTMLElement{
         </div>
         </main>
         `;
-        const appMain = document.querySelector("#main");
+    const appMain = document.querySelector("#main");
 
     const btnBack = document.querySelector("#btnBack");
     btnBack.dataset.ed = "30";
@@ -77,8 +77,8 @@ class PlayGame extends HTMLElement{
       carCard.appendChild(firstCard);
       carCard.appendChild(secondCard);
       cardContainer.appendChild(carCard);
-      carCard.addEventListener("click", (e)=>{
-        document.querySelector("#main").dataset.carInformation = [car.performance.acceleration_ZtoH, car.performance.max_speed_kmh, car.performance.average_Speed]
+      carCard.addEventListener("click", (e) => {
+        document.querySelector("#main").dataset.carInformation = [car.id, car.performance.acceleration_ZtoH, car.performance.max_speed_kmh, car.performance.average_Speed]
         cardContainer.innerHTML = ""
         this.listCircuits();
       })
@@ -102,7 +102,7 @@ class PlayGame extends HTMLElement{
   async listCircuits() {
     const data = await this.getCircuits();
     const cardContainer = document.querySelector("#cardListedContainer");
-    cardContainer.innerHTML=''
+    cardContainer.innerHTML = ''
     data.forEach((circuit) => {
       const circuitCard = document.createElement("article");
       circuitCard.className = "list-card";
@@ -123,9 +123,45 @@ class PlayGame extends HTMLElement{
       circuitCard.appendChild(firstCard);
       circuitCard.appendChild(secondCard);
       cardContainer.appendChild(circuitCard);
-      circuitCard.addEventListener("click", (e)=>{
-      document.querySelector("#main").dataset.circuitInfo = [circuit.id, circuit.name, circuit.laps, circuit.length]
-      document.querySelector("#main").innerHTML = `<simulate-card> </simulate-card>`
+      circuitCard.addEventListener("click", (e) => {
+        const pilotInfo = document.querySelector("#main").dataset.pilotInfo;
+        const pilotArray = pilotInfo.split(',');
+        const pilotStructure = {
+          'teamID': pilotArray[0],
+          'pilotID': pilotArray[1],
+          'pilotName': pilotArray[2],
+          'pilotRole': pilotArray[3],
+        }
+
+        const circuitStructure = {
+          'circuitID': circuit.id,
+          'circuitName': circuit.name,
+          'circuitLaps': circuit.laps,
+          'circuitLength': circuit.length,
+        }
+        console.log(circuitStructure)
+
+        let carInformation = document.querySelector('#main').dataset.carInformation
+        let carArray = carInformation.split(',');
+        const carStructure = {
+          'carID': carArray[0],
+          'carAcceleration': carArray[1],
+          'carMaxSpeed': carArray[2],
+          'carAverageSpeed': carArray[3]
+
+        }
+        const main = document.querySelector("#main")
+        main.innerHTML = ""
+        const simulacion = document.createElement('simulate-card');
+        simulacion.setAttribute('circuit-name', circuitStructure.circuitName);
+        simulacion.setAttribute('laps', parseInt(circuitStructure.circuitLaps) );
+        simulacion.setAttribute('length', parseInt(circuitStructure.circuitLength));
+        simulacion.setAttribute('acceleration', parseInt(carStructure.carAcceleration) );
+        simulacion.setAttribute('max-speed', parseInt(carStructure.carMaxSpeed));
+        simulacion.setAttribute('normal-speed', parseInt(carStructure.carAverageSpeed));
+        simulacion.setAttribute('pilot-name', pilotStructure.pilotName);
+        simulacion.setAttribute('pilot-number', pilotStructure.pilotID);
+        main.appendChild(simulacion);
       })
     });
   }
@@ -151,7 +187,7 @@ class PlayGame extends HTMLElement{
       cardContainer.appendChild(teamCard);
 
       teamCard.addEventListener('click', async (e) => {
-        cardContainer.innerHTML='';
+        cardContainer.innerHTML = '';
         const teamChosen = teamCard.dataset.tid;
         const response = await fetch(`http://localhost:3000/teams/${teamChosen}`);
         try {
@@ -165,7 +201,7 @@ class PlayGame extends HTMLElement{
             firstCard.innerHTML = `
                   <img src="${pilot.image}" alt="">
                   `;
-      
+
             const secondCard = document.createElement("div");
             secondCard.innerHTML = `
                   <p>Name: ${pilot.name}</p>
@@ -175,23 +211,23 @@ class PlayGame extends HTMLElement{
             pilotCard.appendChild(secondCard);
             cardContainer.appendChild(pilotCard);
             pilotCard.addEventListener('click', async (e) => {
-                const chosenPilot = pilot;
-                document.querySelector("#main").dataset.pilotInfo = [team.id,pilot.id, pilot.name, pilot.role]
-                cardContainer.innerHTML = "";
-                this.listCars()
+              const chosenPilot = pilot;
+              document.querySelector("#main").dataset.pilotInfo = [team.id, pilot.id, pilot.name, pilot.role]
+              cardContainer.innerHTML = "";
+              this.listCars()
 
             })
           })
         } catch (error) {
           console.error(error);
-          
+
         }
-        });
+      });
     });
-   
+
 
   }
-  
+
 }
 
 

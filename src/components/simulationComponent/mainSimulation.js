@@ -10,7 +10,7 @@ class Circuit {
 }
 
 class Car {
-    constructor(acceleration, maxSpeed, normalSpeed, fuel = 100) {
+    constructor(acceleration, maxSpeed, normalSpeed, fuel) {
         this.acceleration = acceleration;
         this.maxSpeed = maxSpeed;
         this.normalSpeed = normalSpeed;
@@ -116,6 +116,20 @@ class SingleDriverRace {
 //const inicio = new SimulateCard("raul" ,4 ,3.000 ,"Extreme" , 2.3, 340, 320, "juanito", 2 )
 //inicio.updateResults()
 class SimulateCard extends HTMLElement {
+    static get observedAttributes() {
+        return [
+            'circuit-name', 
+            'laps', 
+            'length', 
+            'weather',
+            'acceleration',
+            'max-speed',
+            'normal-speed',
+            'pilot-name',
+            'pilot-number'
+        ];
+    }
+
     constructor(circuitName, laps, length, weather, acceleration, maxSpeed, normalSpeed, pilotName, pilotNumber) {
         super();
         this.isSimulating = false;
@@ -134,6 +148,43 @@ class SimulateCard extends HTMLElement {
         this.pilotName = pilotName;
         this.pilotNumber = pilotNumber;
 
+        this.circuit = new Circuit(this.circuitName, this.laps, this.length, "dry");
+        this.car = new Car(this.acceleration, this.maxSpeed, this.normalSpeed, 100);
+        this.driver = new Driver(this.pilotName, this.pilotNumber, this.car);
+        this.race = new SingleDriverRace(this.circuit, this.driver);
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        switch(name) {
+            case 'circuit-name':
+                this.circuitName = newValue;
+                break;
+            case 'laps':
+                this.laps = parseInt(newValue);
+                break;
+            case 'length':
+                this.length = parseFloat(newValue);
+                break;
+            case 'weather':
+                this.weather = newValue;
+                break;
+            case 'acceleration':
+                this.acceleration = parseFloat(newValue);
+                break;
+            case 'max-speed':
+                this.maxSpeed = parseInt(newValue);
+                break;
+            case 'normal-speed':
+                this.normalSpeed = parseInt(newValue);
+                break;
+            case 'pilot-name':
+                this.pilotName = newValue;
+                break;
+            case 'pilot-number':
+                this.pilotNumber = parseInt(newValue);
+                break;
+        }
+        
         this.circuit = new Circuit(this.circuitName, this.laps, this.length, this.weather);
         this.car = new Car(this.acceleration, this.maxSpeed, this.normalSpeed);
         this.driver = new Driver(this.pilotName, this.pilotNumber, this.car);
@@ -395,7 +446,7 @@ class SimulateCard extends HTMLElement {
 
                 this.updateResults({
                     ...this.results,
-                    circuit: this.monza,
+                    circuit: this.circuitName,
                     car: this.car,
                     driver: this.driver,
                     currentTime: this.formatTime(this.elapsedTime)
@@ -482,15 +533,15 @@ class SimulateCard extends HTMLElement {
                     <h3>🏁 Circuito</h3>
                     <div class="info-row">
                         <span>Nombre:</span>
-                        <span>${results.circuit?.name || 'Monza'}</span>
+                        <span>${results.circuit?.name }</span>
                     </div>
                     <div class="info-row">
                         <span>Longitud:</span>
-                        <span>${results.circuit?.length || '5.793'} km</span>
+                        <span>${results.circuit?.length } km</span>
                     </div>
                     <div class="info-row">
                         <span>Vueltas:</span>
-                        <span>${results.circuit?.laps || '3'}</span>
+                        <span>${results.circuit?.laps }</span>
                     </div>
                     <div class="info-row">
                         <span>Clima:</span>
@@ -612,16 +663,3 @@ class SimulateCard extends HTMLElement {
 
 customElements.define('simulate-card', SimulateCard);
 
-
-//appMain.innerHTML = ""
-//const simulacion = document.createElement('simulate-card');
-//simulacion.setAttribute('circuit-name', circuitName);
-//simulacion.setAttribute('laps', laps );
-//simulacion.setAttribute('length', length);
-//simulacion.setAttribute('weather', weather);
-//simulacion.setAttribute('acceleration', acceleration);
-//simulacion.setAttribute('max-speed', maxSpeed);
-//simulacion.setAttribute('normal-speed', normalSpeed);
-//simulacion.setAttribute('pilot-name', pilotName);
-//simulacion.setAttribute('pilot-number', pilotNumber);
-//appMain.appendChild(simulacion);
