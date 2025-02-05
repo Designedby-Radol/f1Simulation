@@ -21,10 +21,6 @@ class ListTeam extends HTMLElement{
         btnBack.dataset.ed = "2";
         appMain.innerHTML = `<manage-team></manage-team>`;
       }
-
-    document.querySelector('.list-card').addEventListener('click', (e) =>{
-        console.log(e.target.dataset.tid);
-    })
     });
 
     this.listCircuits();
@@ -64,10 +60,6 @@ class ListTeam extends HTMLElement{
       teamCard.appendChild(secondCard);
       cardContainer.appendChild(teamCard);
     });
-
-    document.querySelector('.list-card').addEventListener('click', (e) =>{
-        console.log(e.target.dataset.tid);
-    })
   }
 }
 

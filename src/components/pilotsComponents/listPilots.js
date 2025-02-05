@@ -60,10 +60,35 @@ class ListPilots extends HTMLElement{
       teamCard.appendChild(secondCard);
       cardContainer.appendChild(teamCard);
 
-      teamCard.addEventListener('click', (e) => {
-        console.log(teamCard.dataset.tid);
-        this.innerHTML  // Accede al dataset del artículo
-    });
+      teamCard.addEventListener('click', async (e) => {
+        cardContainer.innerHTML='';
+        const teamChosen = teamCard.dataset.tid;
+        const response = await fetch(`http://localhost:3000/teams/${teamChosen}`);
+        try {
+          const data = await response.json();
+          let pilots = data.pilots;
+          pilots.forEach(pilot => {
+            const pilotCard = document.createElement("article");
+            pilotCard.className = "list-card";
+            pilotCard.dataset.tid = `${pilot.id}`;
+            const firstCard = document.createElement("div");
+            firstCard.innerHTML = `
+                  <img src="${pilot.image}" alt="">
+                  `;
+      
+            const secondCard = document.createElement("div");
+            secondCard.innerHTML = `
+                  <p>Name: ${pilot.name}</p>
+                  <p>Role: ${pilot.role}</p>           
+                  `;
+            pilotCard.appendChild(firstCard);
+            pilotCard.appendChild(secondCard);
+            cardContainer.appendChild(pilotCard);
+          })
+        } catch (error) {
+          console.error(error);
+        }
+        });
 
     });
     

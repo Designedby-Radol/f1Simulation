@@ -20,10 +20,6 @@ class ListCircuits extends HTMLElement{
         btnBack.dataset.ed = "2";
         appMain.innerHTML = `<manage-circuit></manage-circuit>`;
       }
-
-    document.querySelector('.list-card').addEventListener('click', (e) =>{
-        console.log(e.target.dataset.tid);
-    })
     });
 
     this.listCircuits();
@@ -65,6 +61,9 @@ class ListCircuits extends HTMLElement{
       circuitCard.appendChild(firstCard);
       circuitCard.appendChild(secondCard);
       cardContainer.appendChild(circuitCard);
+      circuitCard.addEventListener("click", (e)=>{
+      document.querySelector("#main").dataset.circuitInfo = [circuit.id, circuit.name, circuit.laps, circuit.length]
+      })
     });
   }
 }

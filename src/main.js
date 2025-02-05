@@ -7,6 +7,7 @@ import './css/style.css'
 import './components/simulationComponent/mainSimulation.js';
 import './components/managementComponent.js';
 import './components/mainComponent.js';
+import './components/playGame.js'
 
 import './components/circuitComponents/managementCircuit.js'
 import './components/circuitComponents/createCircuitComponent.js';

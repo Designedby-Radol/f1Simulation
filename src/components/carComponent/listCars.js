@@ -22,9 +22,6 @@ class ListCars extends HTMLElement{
         appMain.innerHTML = `<manage-cars></manage-cars>`;
       }
 
-    document.querySelector('.list-card').addEventListener('click', (e) =>{
-        console.log(e.target.dataset.tid);
-    })
     });
 
     this.listCircuits();
@@ -65,9 +62,6 @@ class ListCars extends HTMLElement{
       cardContainer.appendChild(carCard);
     });
 
-    document.querySelector('.list-card').addEventListener('click', (e) =>{
-        console.log(e.target.dataset.tid);
-    })
   }
 }
 customElements.define('list-cars', ListCars)
