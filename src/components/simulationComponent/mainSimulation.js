@@ -113,19 +113,31 @@ class SingleDriverRace {
     }
 }
 
+//const inicio = new SimulateCard("raul" ,4 ,3.000 ,"Extreme" , 2.3, 340, 320, "juanito", 2 )
+//inicio.updateResults()
 class SimulateCard extends HTMLElement {
-    constructor() {
+    constructor(circuitName, laps, length, weather, acceleration, maxSpeed, normalSpeed, pilotName, pilotNumber) {
         super();
         this.isSimulating = false;
         this.currentLap = 0;
         this.elapsedTime = 0;
         this.intervalId = null;
         this.results = [];
+        
+        this.circuitName = circuitName;
+        this.laps = laps;
+        this.length = length;
+        this.weather = weather;
+        this.acceleration = acceleration;
+        this.maxSpeed = maxSpeed;
+        this.normalSpeed = normalSpeed;
+        this.pilotName = pilotName;
+        this.pilotNumber = pilotNumber;
 
-        this.monza = new Circuit("Monza", 32, 0.344, "dry");
-        this.car = new Car(2.6, 340, 320);
-        this.driver = new Driver("Max Verstappen", 2, this.car);
-        this.race = new SingleDriverRace(this.monza, this.driver);
+        this.circuit = new Circuit(this.circuitName, this.laps, this.length, this.weather);
+        this.car = new Car(this.acceleration, this.maxSpeed, this.normalSpeed);
+        this.driver = new Driver(this.pilotName, this.pilotNumber, this.car);
+        this.race = new SingleDriverRace(this.circuit, this.driver);
     }
 
     async connectedCallback() {
@@ -517,7 +529,7 @@ class SimulateCard extends HTMLElement {
                 ${lapRows}
             </div>
 
-            <button class="simulate-button" ${this.isSimulating ? 'disabled' : ''}>
+            <button class="simulate-button" ${this.isSimulating ? 'disabled' : ''}>-
                 ${this.isSimulating ? 'Simulando...' : 'Iniciar Simulación'}
             </button>
         `;
@@ -599,3 +611,17 @@ class SimulateCard extends HTMLElement {
 }
 
 customElements.define('simulate-card', SimulateCard);
+
+
+//appMain.innerHTML = ""
+//const simulacion = document.createElement('simulate-card');
+//simulacion.setAttribute('circuit-name', circuitName);
+//simulacion.setAttribute('laps', laps );
+//simulacion.setAttribute('length', length);
+//simulacion.setAttribute('weather', weather);
+//simulacion.setAttribute('acceleration', acceleration);
+//simulacion.setAttribute('max-speed', maxSpeed);
+//simulacion.setAttribute('normal-speed', normalSpeed);
+//simulacion.setAttribute('pilot-name', pilotName);
+//simulacion.setAttribute('pilot-number', pilotNumber);
+//appMain.appendChild(simulacion);
