@@ -417,7 +417,6 @@ class SimulateCard extends HTMLElement {
     formatTime(seconds) {
         const mins = Math.floor(seconds / 60);
         const secs = (seconds % 60).toFixed(3);
-        // Aseguramos que los segundos siempre tengan 3 decimales y 2 dígitos
         return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     }
 
