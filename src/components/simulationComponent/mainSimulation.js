@@ -10,10 +10,12 @@ class Circuit {
 }
 
 class Car {
-    constructor(acceleration, maxSpeed, normalSpeed) {
+    constructor(acceleration, maxSpeed, normalSpeed, fuel = 100) {
         this.acceleration = acceleration;
         this.maxSpeed = maxSpeed;
         this.normalSpeed = normalSpeed;
+        this.fuel = fuel;
+        this.currentTireWear = 0;
         this.fuelConsumption = {
             dry: 1.9,
             rainy: 2.1,
@@ -25,6 +27,11 @@ class Car {
             extreme: 2.5
         };
     }
+
+    reset() {
+        this.currentTireWear = 0;
+        this.fuel = 100;
+    }
 }
 
 class Driver {
@@ -35,6 +42,12 @@ class Driver {
         this.lapTimes = [];
         this.totalTime = 0;
     }
+
+    reset() {
+        this.lapTimes = [];
+        this.totalTime = 0;
+        this.car.reset();
+    }
 }
 
 class SingleDriverRace {
@@ -43,26 +56,31 @@ class SingleDriverRace {
         this.driver = driver;
     }
 
-    calculateLapTime(currentLap) {
-        const speedInMS = this.driver.car.normalSpeed / 3.6; // km/h a m/s
-        const lengthInMeters = this.circuit.length * 1000;
-        const baseTime = lengthInMeters / speedInMS;
-        
+    reset() {
+        this.driver.reset();
+    }
+
+    calculateLapTime() {
+        const baseTime = (this.circuit.length / this.driver.car.normalSpeed) * 3600;
+
         const weatherEffect = {
             dry: 1,
-            rainy: 1.15,  
-            extreme: 1.3  
-        }[this.circuit.weather];        
+            rainy: 1.2,
+            extreme: 1.4
+        }[this.circuit.weather];
 
-        const tireWear = this.driver.car.tireWear[this.circuit.weather] * 
-                        Math.pow(currentLap / this.circuit.laps, 1.5) * 0.05;
-        
-        const fuelEffect = this.driver.car.fuelConsumption[this.circuit.weather] * 
-                          (1 - (currentLap / this.circuit.laps)) * 0.03;
-        
-        const randomFactor = 0.995 + Math.random() * 0.01;
+        this.driver.car.currentTireWear += this.driver.car.tireWear[this.circuit.weather] * 0.25;
+        const fuelEffect = this.driver.car.fuelConsumption[this.circuit.weather];
 
-        return baseTime * weatherEffect * (1 + tireWear + fuelEffect) * randomFactor;
+        this.driver.car.fuel -= fuelEffect;
+        if (this.driver.car.fuel < 0) {
+            this.driver.car.fuel = 0;
+            return false;
+        }
+
+        const randomFactor = 0.95 + Math.random() * 0.1;
+
+        return baseTime * weatherEffect * this.driver.car.currentTireWear * (this.driver.car.fuel * 0.1) * randomFactor;
     }
 
     simulate() {
@@ -70,7 +88,7 @@ class SingleDriverRace {
         this.driver.totalTime = 0;
 
         for (let lap = 1; lap <= this.circuit.laps; lap++) {
-            const lapTime = this.calculateLapTime(lap);
+            const lapTime = this.calculateLapTime();
             this.driver.lapTimes.push(lapTime);
             this.driver.totalTime += lapTime;
         }
@@ -80,8 +98,7 @@ class SingleDriverRace {
         const formatTime = (seconds) => {
             const mins = Math.floor(seconds / 60);
             const secs = (seconds % 60).toFixed(3);
-            // Aseguramos que los segundos siempre tengan 3 decimales y 2 dígitos
-            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            return `${mins}:${secs.padStart(6, '0')}`;
         };
 
         return {
@@ -103,6 +120,12 @@ class SimulateCard extends HTMLElement {
         this.currentLap = 0;
         this.elapsedTime = 0;
         this.intervalId = null;
+        this.results = [];
+
+        this.monza = new Circuit("Monza", 32, 0.344, "dry");
+        this.car = new Car(2.6, 340, 320);
+        this.driver = new Driver("Max Verstappen", 2, this.car);
+        this.race = new SingleDriverRace(this.monza, this.driver);
     }
 
     async connectedCallback() {
@@ -191,7 +214,7 @@ class SimulateCard extends HTMLElement {
                 border: 1px solid #333;
                 overflow-y: auto;
                 scrollbar-width: thin;
-                scrollbar-color:rgb(206, 20, 20) #1E1E1E;
+                scrollbar-color:rgba(129, 9, 9, 0.86) #1E1E1E;
             }
 
             /* Estilos para la scrollbar en Chrome/Safari */
@@ -205,12 +228,12 @@ class SimulateCard extends HTMLElement {
             }
 
             .results-card::-webkit-scrollbar-thumb {
-                background:rgb(194, 9, 9);
+                background:rgb(148, 9, 9);
                 border-radius: 4px;
             }
 
             .results-card::-webkit-scrollbar-thumb:hover {
-                background:rgb(240, 6, 6);
+                background:rgb(131, 16, 16);
             }
 
             .simulation-header {
@@ -225,7 +248,7 @@ class SimulateCard extends HTMLElement {
             .circuit-name, .driver-name {
                 font-size: 1.5rem;
                 font-weight: bold;
-                color:rgb(209, 20, 20);
+                color:rgb(139, 0, 0);
             }
 
             .weather-icon {
@@ -249,7 +272,7 @@ class SimulateCard extends HTMLElement {
                 margin-top: 20px;
                 padding: 15px 30px;
                 font-size: 1.2rem;
-                background-color:rgb(29, 253, 9);
+                background-color:rgb(2, 206, 2);
                 color: white;
                 border: none;
                 border-radius: 8px;
@@ -259,7 +282,7 @@ class SimulateCard extends HTMLElement {
             }
 
             .simulate-button:hover {
-                background-color:rgb(0, 167, 28);
+                background-color:rgb(27, 112, 0);
             }
 
             .simulate-button:disabled {
@@ -283,13 +306,13 @@ class SimulateCard extends HTMLElement {
             }
 
             .completed-lap {
-                background-color:rgb(25, 184, 36);
+                background-color:rgb(39, 136, 45);
                 color: #FFFFFF;
             }
 
             .simulation-title {
                 font-size: 2rem;
-                color:rgb(150, 6, 6);
+                color:rgba(161, 1, 1, 0.85);
                 text-align: center;
                 margin-bottom: 20px;
                 font-weight: bold;
@@ -309,7 +332,7 @@ class SimulateCard extends HTMLElement {
             }
 
             .info-section h3 {
-                color:rgb(146, 1, 1);
+                color:rgb(145, 8, 8);
                 margin-bottom: 15px;
                 font-size: 1.2rem;
             }
@@ -344,79 +367,79 @@ class SimulateCard extends HTMLElement {
         document.head.appendChild(styleSheet);
     }
 
-    async simulateRace() {
-        if (this.isSimulating) return;
-        
+    simulateRace() {
         this.isSimulating = true;
         this.currentLap = 0;
         this.elapsedTime = 0;
-        
-        // Ajustamos solo la longitud del circuito a un valor realista
-        const monza = new Circuit("Monza", 32, 1.302, "dry");
-        const car = new Car(2.6, 340, 320);
-        const driver = new Driver("Max Verstappen", 2, car);
-        const race = new SingleDriverRace(monza, driver);
-        
-        race.simulate();
-        const results = race.getResults();
-        
-        // Almacenamos los tiempos acumulados para cada vuelta
-        const accumulatedTimes = results.lapTimes.map((lap, index) => {
-            const time = this.parseTime(lap.time);
-            if (index === 0) return time;
-            return time + this.parseTime(results.lapTimes[index - 1].time);
-        });
-        
-        this.updateResults({
-            ...results,
-            circuit: monza,
-            car: car,
-            driver: driver,
-            currentTime: '0:00.000'
-        });
-        
-        const updateInterval = 100; // 100ms para actualizaciones más suaves
+        this.race.reset();
+        this.results = [];
+
+        const updateInterval = 100;
+
         this.intervalId = setInterval(() => {
-            this.elapsedTime += updateInterval / 1000;
-            
-            // Actualizamos la vuelta actual basándonos en los tiempos acumulados
-            while (this.currentLap < accumulatedTimes.length && 
-                    this.elapsedTime >= accumulatedTimes[this.currentLap]) {
-                this.currentLap++;
+            if (this.currentLap >= this.race.circuit.laps) {
+                console.log('Terminó la carrera');
+                this.isSimulating = false;
+
+                this.updateResults({
+                    ...this.results,
+                    circuit: this.monza,
+                    car: this.car,
+                    driver: this.driver,
+                    currentTime: this.formatTime(this.elapsedTime)
+                });
+
+                clearInterval(this.intervalId);
+                return;
             }
-            
+
+            // this.elapsedTime += updateInterval / 1000;
+
+            let lapTime = 0;
+            if ((lapTime = this.race.calculateLapTime()) === false) {
+                console.log('Se acabó el combustible');
+                this.isSimulating = false;
+
+                this.updateResults({
+                    ...this.results,
+                    circuit: this.monza,
+                    car: this.car,
+                    driver: this.driver,
+                    currentTime: this.formatTime(this.elapsedTime)
+                });
+
+                clearInterval(this.intervalId);
+                return;
+            }
+
+            this.driver.lapTimes.push(lapTime);
+            this.driver.totalTime += lapTime;
+            this.elapsedTime = this.driver.totalTime;
+
+            this.results = this.race.getResults();
+
             this.updateResults({
-                ...results,
-                circuit: monza,
-                car: car,
-                driver: driver,
+                ...this.results,
+                circuit: this.monza,
+                car: this.car,
+                driver: this.driver,
                 currentTime: this.formatTime(this.elapsedTime)
             });
-            
-            // Detenemos la simulación cuando alcanzamos el tiempo total
-            if (this.elapsedTime >= this.parseTime(results.totalTime)) {
-                clearInterval(this.intervalId);
-                this.isSimulating = false;
-                this.currentLap = results.lapTimes.length; // Aseguramos que todas las vueltas estén marcadas
-                this.updateResults({
-                    ...results,
-                    circuit: monza,
-                    car: car,
-                    driver: driver,
-                    currentTime: results.totalTime
-                });
-            }
+
+            this.currentLap++;
         }, updateInterval);
     }
 
     parseTime(timeString) {
         const [mins, secs] = timeString.split(':');
-        return parseFloat(mins) * 60 + parseFloat(secs);
+        // Convertimos correctamente minutos a segundos y sumamos los segundos
+        return (parseInt(mins) * 60) + parseFloat(secs);
     }
 
     formatTime(seconds) {
         const mins = Math.floor(seconds / 60);
         const secs = (seconds % 60).toFixed(3);
+        // Aseguramos que los segundos siempre tengan 3 decimales y 2 dígitos
         return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     }
 
@@ -430,37 +453,36 @@ class SimulateCard extends HTMLElement {
             extreme: 'Tormenta'
         };
 
-        const lapRows = Array(results.circuit?.laps)
-            .fill(0)
-            .map((_, index) => `
-                <div class="info-row ${this.currentLap > index ? 'completed-lap' : ''}">
-                    <span>Vuelta ${index + 1}</span>
-                    <span>${this.currentLap > index && results.lapTimes[index] ? results.lapTimes[index].time : '--:--:---'}</span>
+        const lapRows = results.lapTimes
+            .map((r, i) => `
+                <div class="info-row ${this.currentLap >= i ? 'completed-lap' : ''}">
+                    <span>Vuelta ${i + 1}</span>
+                    <span>${this.currentLap >= i && r ? r.time : '--:--.---'}</span>
                 </div>
             `)
             .join('');
 
         resultsCard.innerHTML = `
             <h2 class="simulation-title">Simulación</h2>
-            
+
             <div class="info-sections">
                 <div class="info-section">
                     <h3>🏁 Circuito</h3>
                     <div class="info-row">
                         <span>Nombre:</span>
-                        <span>${results.circuit?.name}</span>
+                        <span>${results.circuit?.name || 'Monza'}</span>
                     </div>
                     <div class="info-row">
                         <span>Longitud:</span>
-                        <span>${results.circuit?.length} km</span>
+                        <span>${results.circuit?.length || '5.793'} km</span>
                     </div>
                     <div class="info-row">
                         <span>Vueltas:</span>
-                        <span>${results.circuit?.laps}</span>
+                        <span>${results.circuit?.laps || '3'}</span>
                     </div>
                     <div class="info-row">
                         <span>Clima:</span>
-                        <span>${weatherIcons[results.circuit?.weather]}</span>
+                        <span>${weatherIcons[results.circuit?.weather] || weatherIcons.dry}</span>
                     </div>
                 </div>
 
@@ -480,17 +502,21 @@ class SimulateCard extends HTMLElement {
                     </div>
                     <div class="info-row">
                         <span>Aceleración:</span>
-                        <span>${results.driver?.car?.acceleration }s</span>
+                        <span>${results.driver?.car?.acceleration} s</span>
+                    </div>
+                    <div class="info-row">
+                        <span>Combustible:</span>
+                        <span>${results.driver?.car?.fuel.toFixed(0)} L</span>
                     </div>
                 </div>
             </div>
 
             <div class="time-display">${results.currentTime || '0:00.000'}</div>
-            
+
             <div class="lap-times">
                 ${lapRows}
             </div>
-            
+
             <button class="simulate-button" ${this.isSimulating ? 'disabled' : ''}>
                 ${this.isSimulating ? 'Simulando...' : 'Iniciar Simulación'}
             </button>
@@ -515,22 +541,22 @@ class SimulateCard extends HTMLElement {
                     <h2 class="simulation-title">Simulación</h2>
                     <div class="info-sections">
                         <div class="info-section">
-                            <h3>Circuito</h3>
+                            <h3>🏁 Circuito</h3>
                             <div class="info-row">
                                 <span>Nombre:</span>
-                                <span>Monza</span>
+                                <span>---</span>
                             </div>
                             <div class="info-row">
                                 <span>Longitud:</span>
-                                <span>5.793 km</span>
+                                <span>--- km</span>
                             </div>
                             <div class="info-row">
                                 <span>Vueltas:</span>
-                                <span>3</span>
+                                <span>---</span>
                             </div>
                             <div class="info-row">
                                 <span>Clima:</span>
-                                <span>Seco</span>
+                                <span>---</span>
                             </div>
                         </div>
 
@@ -538,19 +564,23 @@ class SimulateCard extends HTMLElement {
                             <h3>🏎️ Vehículo</h3>
                             <div class="info-row">
                                 <span>Piloto:</span>
-                                <span>Max Verstappen</span>
+                                <span>---</span>
                             </div>
                             <div class="info-row">
                                 <span>Número:</span>
-                                <span>#1</span>
+                                <span>--</span>
                             </div>
                             <div class="info-row">
                                 <span>Velocidad Máx:</span>
-                                <span>340 km/h</span>
+                                <span>--- km/h</span>
                             </div>
                             <div class="info-row">
                                 <span>Aceleración:</span>
-                                <span>2.6s</span>
+                                <span>--- s</span>
+                            </div>
+                            <div class="info-row">
+                                <span>Combustible:</span>
+                                <span>--- L</span>
                             </div>
                         </div>
                     </div>

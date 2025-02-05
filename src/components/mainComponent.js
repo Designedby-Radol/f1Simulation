@@ -21,7 +21,7 @@ class MainComponent extends HTMLElement{
                     <p>Play the game.</p>
                 </a>
             </main>
-            `;        
+            `;
 
         const createButton = document.querySelector('#create').addEventListener('click', (e) => {
             e.preventDefault();
@@ -33,7 +33,6 @@ class MainComponent extends HTMLElement{
             e.preventDefault();
             const appMain = document.querySelector('#main');
             appMain.innerHTML = '<simulate-card></simulate-card>'
-            delete btnBack.dataset.id
         })
     }
 }

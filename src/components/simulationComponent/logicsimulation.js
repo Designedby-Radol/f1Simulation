@@ -8,10 +8,12 @@ class Circuit {
 }
 
 class Car {
-    constructor(acceleration, maxSpeed, normalSpeed) {
+    constructor(acceleration, maxSpeed, normalSpeed, fuel = 100) {
         this.acceleration = acceleration;
         this.maxSpeed = maxSpeed;
         this.normalSpeed = normalSpeed;
+        this.fuel = fuel;
+        this.currentTireWear = 0;
         this.fuelConsumption = {
             dry: 1.9,
             rainy: 2.1,
@@ -51,18 +53,19 @@ class SingleDriverRace {
             extreme: 1.4
         }[this.circuit.weather];
         
-        const tireWear = this.driver.car.tireWear[this.circuit.weather] * (currentLap / this.circuit.laps);
-        const fuelEffect = this.driver.car.fuelConsumption[this.circuit.weather] * (currentLap / this.circuit.laps);
+        this.driver.car.currentTireWear += this.driver.car.tireWear[this.circuit.weather] * 0.1;
+        const fuelEffect = this.driver.car.fuelConsumption[this.circuit.weather];
+        this.driver.car.fuel -= fuelEffect;
         const randomFactor = 0.95 + Math.random() * 0.1;
 
-        return baseTime * weatherEffect * (1 + tireWear) * (1 + fuelEffect) * randomFactor;
+        return baseTime * weatherEffect * this.driver.car.currentTireWear * (this.driver.car.fuel * 0.1) * randomFactor;
     }
 
     simulate() {
         this.driver.lapTimes = [];
         this.driver.totalTime = 0;
 
-        for (let lap = 1; lap <= this.circuit.laps; lap++) {
+        for (let lap = 0; lap < this.circuit.laps; lap++) {
             const lapTime = this.calculateLapTime();
             this.driver.lapTimes.push(lapTime);
             this.driver.totalTime += lapTime;
@@ -88,7 +91,7 @@ class SingleDriverRace {
     }
 }
 
-const monza = new Circuit("Monza", 32, 1, "extreme");
+const monza = new Circuit("Monza", 2, 10, "extreme");
 const car = new Car(2.6, 340, 320);
 const driver = new Driver("Max Verstappen", 1, car);
 const race = new SingleDriverRace(monza, driver);
