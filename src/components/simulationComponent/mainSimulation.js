@@ -556,19 +556,19 @@ class SimulateCard extends HTMLElement {
                     <h3>🏁 Circuito</h3>
                     <div class="info-row">
                         <span>Nombre:</span>
-                        <span>${results.circuit?.name }</span>
+                        <span>${this.circuit.name}</span>
                     </div>
                     <div class="info-row">
                         <span>Longitud:</span>
-                        <span>${results.circuit?.length } km</span>
+                        <span>${this.circuit.length} km</span>
                     </div>
                     <div class="info-row">
                         <span>Vueltas:</span>
-                        <span>${results.circuit?.laps }</span>
+                        <span>${this.circuit.laps}</span>
                     </div>
                     <div class="info-row">
                         <span>Clima:</span>
-                        <span>${weatherIcons[results.circuit?.weather] || weatherIcons.dry}</span>
+                        <span>${weatherIcons[this.circuit.weather] || weatherIcons.dry}</span>
                     </div>
                 </div>
 
@@ -576,23 +576,23 @@ class SimulateCard extends HTMLElement {
                     <h3>🏎️ Vehículo</h3>
                     <div class="info-row">
                         <span>Piloto:</span>
-                        <span>${results.driver?.name}</span>
+                        <span>${this.driver?.name || 'Sin piloto'}</span>
                     </div>
                     <div class="info-row">
                         <span>Número:</span>
-                        <span>#${results.driver?.number}</span>
+                        <span>${this.driver?.number ?? '--'}</span>
                     </div>
                     <div class="info-row">
                         <span>Velocidad Máx:</span>
-                        <span>${results.driver?.car?.maxSpeed} km/h</span>
+                        <span>${this.driver?.car?.maxSpeed} km/h</span>
                     </div>
                     <div class="info-row">
                         <span>Aceleración:</span>
-                        <span>${results.driver?.car?.acceleration} s</span>
+                        <span>${this.driver?.car?.acceleration} s</span>
                     </div>
                     <div class="info-row">
                         <span>Combustible:</span>
-                        <span>${results.driver?.car?.fuel.toFixed(0)} L</span>
+                        <span>${this.driver?.car?.fuel.toFixed(0)} L</span>
                     </div>
                 </div>
             </div>
@@ -603,7 +603,7 @@ class SimulateCard extends HTMLElement {
                 ${lapRows}
             </div>
 
-            <button class="simulate-button" ${this.isSimulating ? 'disabled' : ''}>-
+            <button class="simulate-button" ${this.isSimulating ? 'disabled' : ''}>
                 ${this.isSimulating ? 'Simulando...' : 'Iniciar Simulación'}
             </button>
         `;
