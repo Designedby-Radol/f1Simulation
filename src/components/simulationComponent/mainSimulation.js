@@ -130,7 +130,7 @@ class SimulateCard extends HTMLElement {
         ];
     }
 
-    constructor(circuitName, laps, length, weather, acceleration, maxSpeed, normalSpeed, pilotName, pilotNumber) {
+    constructor() {
         super();
         this.isSimulating = false;
         this.currentLap = 0;
@@ -138,35 +138,21 @@ class SimulateCard extends HTMLElement {
         this.intervalId = null;
         this.results = [];
         
-        this.circuitName = circuitName;
-        this.laps = laps;
-        this.length = length;
-        this.weather = weather;
-        this.acceleration = acceleration;
-        this.maxSpeed = maxSpeed;
-        this.normalSpeed = normalSpeed;
-        this.pilotName = pilotName;
-        this.pilotNumber = pilotNumber;
-
-        this.circuit = new Circuit(this.circuitName, this.laps, this.length, "dry");
-        this.car = new Car(this.acceleration, this.maxSpeed, this.normalSpeed, 100);
-        this.driver = new Driver(this.pilotName, this.pilotNumber, this.car);
-        this.race = new SingleDriverRace(this.circuit, this.driver);
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
         switch(name) {
             case 'circuit-name':
                 this.circuitName = newValue;
+                console.log(this.circuitName);
                 break;
             case 'laps':
                 this.laps = parseInt(newValue);
+                console.log(this.laps);
                 break;
             case 'length':
                 this.length = parseFloat(newValue);
-                break;
-            case 'weather':
-                this.weather = newValue;
+                console.log(this.length);
                 break;
             case 'acceleration':
                 this.acceleration = parseFloat(newValue);
@@ -185,8 +171,8 @@ class SimulateCard extends HTMLElement {
                 break;
         }
         
-        this.circuit = new Circuit(this.circuitName, this.laps, this.length, this.weather);
-        this.car = new Car(this.acceleration, this.maxSpeed, this.normalSpeed);
+        this.circuit = new Circuit(this.circuitName, this.laps, this.length, "dry");
+        this.car = new Car(this.acceleration, this.maxSpeed, this.normalSpeed, 100);
         this.driver = new Driver(this.pilotName, this.pilotNumber, this.car);
         this.race = new SingleDriverRace(this.circuit, this.driver);
     }
@@ -430,6 +416,38 @@ class SimulateCard extends HTMLElement {
         document.head.appendChild(styleSheet);
     }
 
+    async saveSimulationResults(results) {
+        try {
+            const response = await fetch('http://localhost:3000/simulations', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    date: new Date().toISOString(),
+                    driverName: this.driver.name,
+                    number: this.driver.number,
+                    totalTime: results.currentTime,
+                    lapTimes: this.driver.lapTimes.map((time, index) => ({
+                        lap: index + 1,
+                        time: this.formatTime(time)
+                    }))
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al guardar la simulación');
+            }
+
+            const savedData = await response.json();
+            console.log('Simulación guardada exitosamente:', savedData);
+            return savedData;
+        } catch (error) {
+            console.error('Error guardando la simulación:', error);
+            throw error;
+        }
+    }
+
     simulateRace() {
         this.isSimulating = true;
         this.currentLap = 0;
@@ -439,24 +457,31 @@ class SimulateCard extends HTMLElement {
 
         const updateInterval = 100;
 
-        this.intervalId = setInterval(() => {
+        this.intervalId = setInterval(async () => {
             if (this.currentLap >= this.race.circuit.laps) {
                 console.log('Terminó la carrera');
                 this.isSimulating = false;
 
-                this.updateResults({
+                const finalResults = {
                     ...this.results,
                     circuit: this.circuitName,
                     car: this.car,
                     driver: this.driver,
                     currentTime: this.formatTime(this.elapsedTime)
-                });
+                };
+
+                this.updateResults(finalResults);
+
+                // Guardar resultados al finalizar la simulación
+                try {
+                    await this.saveSimulationResults(finalResults);
+                } catch (error) {
+                    console.error('Error al guardar los resultados:', error);
+                }
 
                 clearInterval(this.intervalId);
                 return;
             }
-
-            // this.elapsedTime += updateInterval / 1000;
 
             let lapTime = 0;
             if ((lapTime = this.race.calculateLapTime()) === false) {
@@ -465,7 +490,7 @@ class SimulateCard extends HTMLElement {
 
                 this.updateResults({
                     ...this.results,
-                    circuit: this.monza,
+                    circuit: this.circuit,
                     car: this.car,
                     driver: this.driver,
                     currentTime: this.formatTime(this.elapsedTime)
@@ -483,7 +508,7 @@ class SimulateCard extends HTMLElement {
 
             this.updateResults({
                 ...this.results,
-                circuit: this.monza,
+                circuit: this.circuit,
                 car: this.car,
                 driver: this.driver,
                 currentTime: this.formatTime(this.elapsedTime)
@@ -495,14 +520,12 @@ class SimulateCard extends HTMLElement {
 
     parseTime(timeString) {
         const [mins, secs] = timeString.split(':');
-        // Convertimos correctamente minutos a segundos y sumamos los segundos
         return (parseInt(mins) * 60) + parseFloat(secs);
     }
 
     formatTime(seconds) {
         const mins = Math.floor(seconds / 60);
         const secs = (seconds % 60).toFixed(3);
-        // Aseguramos que los segundos siempre tengan 3 decimales y 2 dígitos
         return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     }
 
@@ -663,3 +686,11 @@ class SimulateCard extends HTMLElement {
 
 customElements.define('simulate-card', SimulateCard);
 
+//simulacion.setAttribute('circuit-name', "pedro");
+//simulacion.setAttribute('laps', 3 );
+//simulacion.setAttribute('length',4);
+//simulacion.setAttribute('acceleration', 2.3 );
+//simulacion.setAttribute('max-speed', 340);
+//simulacion.setAttribute('normal-speed',220);
+//simulacion.setAttribute('pilot-name',"raul");
+//simulacion.setAttribute('pilot-number', 2);

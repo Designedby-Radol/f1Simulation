@@ -154,11 +154,11 @@ class PlayGame extends HTMLElement {
         main.innerHTML = ""
         const simulacion = document.createElement('simulate-card');
         simulacion.setAttribute('circuit-name', circuitStructure.circuitName);
-        simulacion.setAttribute('laps', parseInt(circuitStructure.circuitLaps) );
-        simulacion.setAttribute('length', parseInt(circuitStructure.circuitLength));
-        simulacion.setAttribute('acceleration', parseInt(carStructure.carAcceleration) );
-        simulacion.setAttribute('max-speed', parseInt(carStructure.carMaxSpeed));
-        simulacion.setAttribute('normal-speed', parseInt(carStructure.carAverageSpeed));
+        simulacion.setAttribute('laps', circuitStructure.circuitLaps );
+        simulacion.setAttribute('length', circuitStructure.circuitLength);
+        simulacion.setAttribute('acceleration', carStructure.carAcceleration );
+        simulacion.setAttribute('max-speed', carStructure.carMaxSpeed);
+        simulacion.setAttribute('normal-speed', carStructure.carAverageSpeed);
         simulacion.setAttribute('pilot-name', pilotStructure.pilotName);
         simulacion.setAttribute('pilot-number', pilotStructure.pilotID);
         main.appendChild(simulacion);
